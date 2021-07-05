@@ -7,78 +7,83 @@ function Home() {
   const [upperTopInput, setUpperTopOutput] = useState(false);
   const [folders, setFolders] = useState([
     {
+        "id": 1,
         "name": "DuLieu",
         "isOpened": true,
         "showInput": false,
         "showEdit": false,
-        "childFolders": [
-            {
-                "name": "NHAN SU",
-                "isOpened": true,
-                "showInput": false,
-                "showEdit": false,
-                "childFolders": [
-                    {
-                        "name": "BIEN CHE",
-                        "showInput": false,
-                        "isOpened": false,
-                        "showEdit": false,
-                    },
-                    {
-                        "name": "HOP DONG",
-                        "showInput": false,
-                        "isOpened": false,
-                        "showEdit": false,
-                    },
-                ]
-            },
-            {
-                "name": "TAI LIEU",
-                "isOpened": false,
-                "showInput": false,
-                "showEdit": false,
-                "childFolders": [
-                    {
-                        "name": "DTKH",
-                        "showInput": false,
-                        "showEdit": false,
-                        "isOpened": false,
-                    },
-                    {
-                        "name": "LUU TRU",
-                        "showInput": false,
-                        "isOpened": false,
-                        "showEdit": false,
-                    },
-                ]
-            },
-            {
-                "name": "VAN BANG",
-                "isOpened": false,
-                "showInput": false,
-                "showEdit": false,
-                "childFolders": [
-                    {
-                        "name": "BAN LUONG",
-                        "showInput": false,
-                        "showEdit": false,
-                        "isOpened": false,
-                    },
-                    {
-                        "name": "BAO CAO",
-                        "showInput": false,
-                        "isOpened": false,
-                        "showEdit": false,
-                    },
-                    {
-                        "name": "HT",
-                        "showInput": false,
-                        "isOpened": false,
-                        "showEdit": false,
-                    },
-                ]
-            },
-        ]
+        "parent": null,
+    },
+    {
+        "id": 2,
+        "name": "NHAN SU",
+        "isOpened": true,
+        "showInput": false,
+        "showEdit": false,
+        "parent": 1,
+    },
+    {   "id": 3,
+        "name": "BIEN CHE",
+        "showInput": false,
+        "isOpened": false,
+        "showEdit": false,
+        "parent": 2,
+    },
+    {   "id": 4,
+        "name": "HOP DONG",
+        "showInput": false,
+        "isOpened": false,
+        "showEdit": false,
+        "parent": 2,
+    },      
+    {   "id": 5,
+        "name": "TAI LIEU",
+        "isOpened": false,
+        "showInput": false,
+        "showEdit": false,
+        "parent": 1,
+    },
+    {   "id": 6,
+        "name": "DTKH",
+        "showInput": false,
+        "showEdit": false,
+        "isOpened": false,
+        "parent": 5,
+    },
+    {   "id": 7,
+        "name": "LUU TRU",
+        "showInput": false,
+        "isOpened": false,
+        "showEdit": false,
+        "parent": 5,
+    },
+    {   "id": 8,
+        "name": "VAN BANG",
+        "isOpened": false,
+        "showInput": false,
+        "showEdit": false,
+        "parent": 1,
+    },   
+    {   "id": 9,
+        "name": "BAN LUONG",
+        "showInput": false,
+        "showEdit": false,
+        "isOpened": false,
+        "parent": 8,
+    },
+    {   "id": 10,
+        "name": "BAO CAO",
+        "showInput": false,
+        "isOpened": false,
+        "showEdit": false,
+        "parent": 8,
+    },
+    {   "id": 11,
+        "name": "HT",
+        "showInput": false,
+        "isOpened": false,
+        "showEdit": false,
+        "parent": 8,
     },
 ]);
 
@@ -86,42 +91,18 @@ const [undoState, setUndoState] = useState([]);
 const [redoState, setRedoState] = useState([]);
 
 const upperAdd = () => {
-undoState.push(folders);
-console.log(undoState);
- let middle = JSON.parse(JSON.stringify(folders));
- middle.push({  
-     "name": upperName,
-     "isOpened": true,
-     "showInput": false,
-     "showEdit": false,
-     "childFolders": []
- })
+    undoState.push(folders);
+    console.log(undoState);
+    let middle = JSON.parse(JSON.stringify(folders));
+    middle.push({  
+        "id": Math.floor(Math.random() * (999999999 - 1000 + 1)) + 1000,
+        "name": upperName,
+        "isOpened": true,
+        "showInput": false,
+        "showEdit": false,
+        "parent": null,
+    })
  setFolders(middle);
-}
-
-const deleteTop = (name) => {
-    undoState.push(folders)
-    let index = folders.findIndex(folder => folder.name === name);
-    let middle = JSON.parse(JSON.stringify(folders));
-    middle.splice(index, 1);
-    setFolders(middle);
-}
-
-
-const showTopInput = (name) => {
-    
-    let Index = folders.findIndex(folder => folder.name === name);
-    let middle = JSON.parse(JSON.stringify(folders));
-    middle[Index].showInput = !middle[Index].showInput;
-    setFolders(middle);
-}
-
-
-const showTopEdit = (name) => {
-    let Index = folders.findIndex(folder => folder.name === name);
-    let middle = JSON.parse(JSON.stringify(folders));
-    middle[Index].showEdit = !middle[Index].showEdit;
-    setFolders(middle);
 }
 
 const undo = () => {
@@ -146,31 +127,6 @@ const [editName, setEditName] = useState();
 const [newName, setNewName] = useState();
 const [search, setSearch] = useState();
 
-const open = (name) => {
-    if (folders.find(folder => folder.name == name))
-    {
-        let Index = folders.findIndex(folder => folder.name === name);
-        let middle = JSON.parse(JSON.stringify(folders));
-        middle[Index].isOpened = !middle[Index].isOpened
-        setFolders(middle);
-    }
-    if (folders.map(result => result.childFolders.map(child => child.name).includes(name)))
-    {
-        console.log(folders.map(result => result.childFolders.map(child => child.name).includes(name)))
-        for (let i=0; i < folders.length; i++) {
-            for (let j = 0; j < folders[i].childFolder; j++)
-            {
-                if (folders[i].childFolders[j].name == name) {
-
-                    let middle = JSON.parse(JSON.stringify(folders));
-                    middle[i].childFolders[j].isOpened = !middle[i].childFolders[j].isOpened;
-                    setFolders(middle);
-                }
-            }
-        }
-    }
-}
-
 const handleEditChange = (e) => {
     setEditName(e.target.value);
     console.log(editName);
@@ -190,19 +146,20 @@ const handleFolderName = (e) => {
     <button onClick={redo}>Redo</button>
     <span>      Search bar: </span><input onChange={event => setSearch(event.target.value)} />
 
-    {!search && folders.map((folder, key) => (
+    {!search && folders.filter(folder => folder.parent === null).map((folder, key) => (
           <React.Fragment key={key}>
-          <FolderNew folders={folders} undoState={undoState} setUndoState={setUndoState} newName={newName} setNewName={setNewName} name={folder.name} editName={editName} setEditName={setEditName} setFolders={setFolders} handleFolderName={handleFolderName} handleEditChange={handleEditChange} showInput={folder.showInput} showEdit={folder.showEdit} childFolder={folder.childFolders} isOpened={folder.isOpened} open={() => open(folder.name)} remove={() => deleteTop(folder.name)} add={() => showTopInput(folder.name)} edit={() => {setEditName(folder.name); showTopEdit(folder.name)}}/>
+          <FolderNew folders={folders} id={folder.id} undoState={undoState} setUndoState={setUndoState} newName={newName} setNewName={setNewName} name={folder.name} editName={editName} setEditName={setEditName} setFolders={setFolders} handleFolderName={handleFolderName} handleEditChange={handleEditChange} showInput={folder.showInput} showEdit={folder.showEdit} isOpened={folder.isOpened} />
           </React.Fragment>
       )
     )}
 
-    {search && folders.filter(result => (result.name == search || result.childFolders.map(child => child.name).includes(search) || folders[0].childFolders.map(child => child.childFolders).concat.apply([], folders[0].childFolders.map(child => child.childFolders)).map( grandchild => grandchild.name).includes(search))).map((folder, key) => (
+    {search && folders.filter(folder => folder.name === search).map((folder, key) => (
           <React.Fragment key={key}>
-          <FolderNew folders={folders} undoState={undoState} setUndoState={setUndoState} newName={newName} setNewName={setNewName} name={folder.name} editName={editName} setEditName={setEditName} setFolders={setFolders} handleFolderName={handleFolderName} handleEditChange={handleEditChange} showInput={folder.showInput} showEdit={folder.showEdit} childFolder={folder.childFolders} isOpened={folder.isOpened} open={() => open(folder.name)} remove={() => deleteTop(folder.name)} add={() => showTopInput(folder.name)} edit={() => {setEditName(folder.name); showTopEdit(folder.name)}}/>
+          <FolderNew folders={folders} id={folder.id} undoState={undoState} setUndoState={setUndoState} newName={newName} setNewName={setNewName} name={folder.name} editName={editName} setEditName={setEditName} setFolders={setFolders} handleFolderName={handleFolderName} handleEditChange={handleEditChange} showInput={folder.showInput} showEdit={folder.showEdit} isOpened={folder.isOpened} />
           </React.Fragment>
       )
     )}
+
 
 
     </div>
