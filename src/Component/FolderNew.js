@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 
-function FolderNew({folders, id, name, undoState, setUndoState, editName, handleEditChange, handleFolderName, setEditName, isOpened, setFolders, showInput, showEdit, newName, setNewName}) {
+function FolderNew({folders, id, name, undoState, setUndoState, isOpened, setFolders, showInput, showEdit}) {
 
+
+const [editName, setEditName] = useState();
+const [newName, setNewName] = useState();
 
 const open = (id) => {
     let index = folders.findIndex(folder => folder.id === id);
@@ -56,7 +59,13 @@ const showEditBar = (id) => {
      })
      setFolders(middle);
     }
-
+    const handleEditChange = (e) => {
+      setEditName(e.target.value);
+    }
+  
+  const handleFolderName = (e) => {
+      setNewName(e.target.value);
+    }
 
 
   return (
@@ -68,7 +77,7 @@ const showEditBar = (id) => {
     </div>
     
     
-    {isOpened && folders.filter(child => child.parent == id).map( (child, key) => <ul key={key}><li><FolderNew folders={folders} id={child.id} undoState={undoState} setUndoState={setUndoState} newName={newName} setNewName={setNewName} name={child.name} editName={editName} setEditName={setEditName} setFolders={setFolders} handleFolderName={handleFolderName} handleEditChange={handleEditChange} showInput={child.showInput} showEdit={child.showEdit} isOpened={child.isOpened} /></li></ul>) }
+    {isOpened && folders.filter(child => child.parent == id).map( (child, key) => <ul key={key}><li><FolderNew folders={folders} id={child.id} undoState={undoState} setUndoState={setUndoState} name={child.name} setFolders={setFolders} showInput={child.showInput} showEdit={child.showEdit} isOpened={child.isOpened} /></li></ul>) }
     </React.Fragment>
   );
 }

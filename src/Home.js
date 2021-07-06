@@ -5,8 +5,12 @@ import FolderNew from './Component/FolderNew';
 function Home() {
   // Declare a new state variable, which we'll call "count"
   const [upperTopInput, setUpperTopOutput] = useState(false);
+  const [undoState, setUndoState] = useState([]);
+const [redoState, setRedoState] = useState([]);
+const [upperName, setUpperName] = useState();
+const [search, setSearch] = useState();
   const [folders, setFolders] = useState([
-    {
+    {   
         "id": 1,
         "name": "DuLieu",
         "isOpened": true,
@@ -86,10 +90,6 @@ function Home() {
         "parent": 8,
     },
 ]);
-
-const [undoState, setUndoState] = useState([]);
-const [redoState, setRedoState] = useState([]);
-
 const upperAdd = () => {
     undoState.push(folders);
     console.log(undoState);
@@ -122,22 +122,6 @@ const redo = () => {
     }
     else return;
 }
-const [upperName, setUpperName] = useState();
-const [editName, setEditName] = useState();
-const [newName, setNewName] = useState();
-const [search, setSearch] = useState();
-
-const handleEditChange = (e) => {
-    setEditName(e.target.value);
-    console.log(editName);
-  }
-
-const handleFolderName = (e) => {
-    setNewName(e.target.value);
-    console.log(newName);
-  }
-  
-  
 
   return (
     <div >
@@ -148,14 +132,14 @@ const handleFolderName = (e) => {
 
     {!search && folders.filter(folder => folder.parent === null).map((folder, key) => (
           <React.Fragment key={key}>
-          <FolderNew folders={folders} id={folder.id} undoState={undoState} setUndoState={setUndoState} newName={newName} setNewName={setNewName} name={folder.name} editName={editName} setEditName={setEditName} setFolders={setFolders} handleFolderName={handleFolderName} handleEditChange={handleEditChange} showInput={folder.showInput} showEdit={folder.showEdit} isOpened={folder.isOpened} />
+          <FolderNew folders={folders} name={folder.name} id={folder.id} undoState={undoState} setUndoState={setUndoState} setFolders={setFolders} showInput={folder.showInput} showEdit={folder.showEdit} isOpened={folder.isOpened} />
           </React.Fragment>
       )
     )}
 
     {search && folders.filter(folder => folder.name === search).map((folder, key) => (
           <React.Fragment key={key}>
-          <FolderNew folders={folders} id={folder.id} undoState={undoState} setUndoState={setUndoState} newName={newName} setNewName={setNewName} name={folder.name} editName={editName} setEditName={setEditName} setFolders={setFolders} handleFolderName={handleFolderName} handleEditChange={handleEditChange} showInput={folder.showInput} showEdit={folder.showEdit} isOpened={folder.isOpened} />
+          <FolderNew folders={folders} id={folder.id} undoState={undoState} setUndoState={setUndoState} setFolders={setFolders} showInput={folder.showInput} showEdit={folder.showEdit} isOpened={folder.isOpened} />
           </React.Fragment>
       )
     )}
