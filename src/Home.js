@@ -1,14 +1,9 @@
-import React, { useState } from 'react';
-import Folder from './Component/Folder';
+import React, { useContext, useState } from 'react';
 import FolderNew from './Component/FolderNew';
+import {Folders, Undo} from './Context/ContextProvider';
 
 function Home() {
   // Declare a new state variable, which we'll call "count"
-  const [upperTopInput, setUpperTopOutput] = useState(false);
-  const [undoState, setUndoState] = useState([]);
-const [redoState, setRedoState] = useState([]);
-const [upperName, setUpperName] = useState();
-const [search, setSearch] = useState();
   const [folders, setFolders] = useState([
     {   
         "id": 1,
@@ -89,7 +84,13 @@ const [search, setSearch] = useState();
         "showEdit": false,
         "parent": 8,
     },
-]);
+  ]);
+  
+  const [undoState, setUndoState] = useState([]);
+  const [upperTopInput, setUpperTopOutput] = useState(false);   
+  const [redoState, setRedoState] = useState([]);
+  const [upperName, setUpperName] = useState();
+  const [search, setSearch] = useState();
 const upperAdd = () => {
     undoState.push(folders);
     console.log(undoState);
@@ -124,6 +125,8 @@ const redo = () => {
 }
 
   return (
+    <Folders.Provider value={{folders, setFolders}}>
+    <Undo.Provider value={{undoState, setUndoState}}>
     <div >
     <button onClick={() => setUpperTopOutput(!upperTopInput)}>New Folder</button><span>   {upperTopInput && <div style={{float: 'inline-start'}}><input onChange={event => setUpperName(event.target.value)} /> <button onClick={upperAdd}>Add new folder</button></div>}</span>
     <button onClick={undo}>Undo</button>
@@ -132,21 +135,20 @@ const redo = () => {
 
     {!search && folders.filter(folder => folder.parent === null).map((folder, key) => (
           <React.Fragment key={key}>
-          <FolderNew folders={folders} name={folder.name} id={folder.id} undoState={undoState} setUndoState={setUndoState} setFolders={setFolders} showInput={folder.showInput} showEdit={folder.showEdit} isOpened={folder.isOpened} />
+          <FolderNew id={folder.id} />
           </React.Fragment>
       )
     )}
 
-    {search && folders.filter(folder => folder.name === search).map((folder, key) => (
+  {search && folders.filter(folder => folder.name === search).map((folder, key) => (
           <React.Fragment key={key}>
-          <FolderNew folders={folders} name={folder.name} id={folder.id} undoState={undoState} setUndoState={setUndoState} setFolders={setFolders} showInput={folder.showInput} showEdit={folder.showEdit} isOpened={folder.isOpened} />
+          <FolderNew id={folder.id} />
           </React.Fragment>
       )
     )}
-
-
-
     </div>
+    </Undo.Provider>
+    </Folders.Provider>
   );
 }
 

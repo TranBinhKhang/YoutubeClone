@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './Home';
 import reportWebVitals from './reportWebVitals';
+import {Folders, Undo} from './Context/ContextProvider';
+
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+
+        <Home />
+
   </React.StrictMode>,
   document.getElementById('root')
 );
