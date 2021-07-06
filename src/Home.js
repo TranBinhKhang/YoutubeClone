@@ -139,7 +139,7 @@ const redo = () => {
 
     {search && folders.filter(folder => folder.name === search).map((folder, key) => (
           <React.Fragment key={key}>
-          <FolderNew folders={folders} id={folder.id} undoState={undoState} setUndoState={setUndoState} setFolders={setFolders} showInput={folder.showInput} showEdit={folder.showEdit} isOpened={folder.isOpened} />
+          <FolderNew folders={folders} name={folder.name} id={folder.id} undoState={undoState} setUndoState={setUndoState} setFolders={setFolders} showInput={folder.showInput} showEdit={folder.showEdit} isOpened={folder.isOpened} />
           </React.Fragment>
       )
     )}
