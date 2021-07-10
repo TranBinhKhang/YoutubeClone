@@ -1,17 +1,28 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './Home';
 import reportWebVitals from './reportWebVitals';
-import {Folders, Undo} from './Context/ContextProvider';
+import { useDispatch, useSelector } from "react-redux";
+import { getData } from './Store/actions';
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk"
+import reducers from './Store/reducers';
+import { Provider } from 'react-redux'
+
+export const folderStore = createStore(
+    reducers,
+    {},
+    applyMiddleware(thunk)
+)
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-
+    <Provider store={folderStore}>
         <Home />
-
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,26 +1,27 @@
 import React, { useState, useContext } from 'react';
 import {Folders, Undo} from '../Context/ContextProvider';
+import { useDispatch, useSelector } from "react-redux";
+import { openFolder } from '../Store/actions';
 
 function FolderNew({id}) {
+  const folders = useSelector((state) => state.folder.data);
+  const dispatch = useDispatch();
 
-const {folders, setFolders } = useContext(Folders);
+// const {folders, setFolders } = useContext(Folders);
 const { undoState, setUndoState } = useContext(Undo);
 const [editName, setEditName] = useState();
 const [newName, setNewName] = useState();
 const index = folders.findIndex(folder => folder.id === id);
 
 const open = () => {
-    
-    let middle = JSON.parse(JSON.stringify(folders));
-    middle[index].isOpened = !middle[index].isOpened
-    setFolders(middle);
+  dispatch({type:'OpenFolder',payload:index});
 }
 
 const showFolder = () => {
     
     let middle = JSON.parse(JSON.stringify(folders));
     middle[index].showInput = !middle[index].showInput;
-    setFolders(middle);
+    //setFolders(middle);
 }
 
 
@@ -28,7 +29,7 @@ const showEditBar = () => {
     
     let middle = JSON.parse(JSON.stringify(folders));
     middle[index].showEdit = !middle[index].showEdit;
-    setFolders(middle);
+    //setFolders(middle);
   }
 
   const deleteFolder = () => {
@@ -36,7 +37,7 @@ const showEditBar = () => {
     
     let middle = JSON.parse(JSON.stringify(folders));
     middle.splice(index, 1);
-    setFolders(middle);
+    //setFolders(middle);
   }
 
   const editFolderName = () => {
@@ -44,22 +45,26 @@ const showEditBar = () => {
     undoState.push(folders);
     let middle = JSON.parse(JSON.stringify(folders));
     middle[index].name = editName;
-    setFolders(middle);
+    //setFolders(middle);
   }
 
   const addFolder = () => {
-    undoState.push(folders);
-    console.log(undoState);
-     let middle = JSON.parse(JSON.stringify(folders));
-     middle.push({  
-        "id": Math.floor(Math.random() * (99999999999999999 - 1000 + 1)) + 1000,
-         "name": newName,
-         "isOpened": true,
-         "showInput": false,
-         "showEdit": false,
-         "parent": id,
-     })
-     setFolders(middle);
+    dispatch({type:'NewFolder',payload:{
+      newName: newName,
+      parent: id
+    }});
+    // undoState.push(folders);
+    // console.log(undoState);
+    //  let middle = JSON.parse(JSON.stringify(folders));
+    //  middle.push({  
+    //     "id": Math.floor(Math.random() * (99999999999999999 - 1000 + 1)) + 1000,
+    //      "name": newName,
+    //      "isOpened": true,
+    //      "showInput": false,
+    //      "showEdit": false,
+    //      "parent": id,
+    //  })
+     //setFolders(middle);
     }
     const handleEditChange = (e) => {
       setEditName(e.target.value);
