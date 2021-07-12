@@ -3,7 +3,7 @@ import axios from 'axios';
 import FolderNew from './Component/FolderNew';
 import {Folders, Undo} from './Context/ContextProvider';
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from './Store/actions';
+import { getData, test } from './Store/actions';
 
 function Home() {
   // Declare a new state variable, which we'll call "count"
@@ -19,9 +19,11 @@ function Home() {
 //     getFolders();
 //   }, []);
 const folders = useSelector((state) => state.folder.data);
+const TEST = useSelector((state) => state.folder);
 const dispatch = useDispatch(); //this hook gives us dispatch method
 useEffect(() => {
   dispatch(getData());
+  // dispatch(test());
   // getFolders();
 }, []);
   
@@ -70,7 +72,7 @@ const redo = () => {
     <Undo.Provider value={{undoState, setUndoState}}>
     <div >
     <button onClick={() => setUpperTopOutput(!upperTopInput)}>New Folder</button><span>   {upperTopInput && <div style={{float: 'inline-start'}}><input onChange={event => setUpperName(event.target.value)} /> <button onClick={upperAdd}>Add new folder</button></div>}</span>
-    <button onClick={() => console.log(folders)}>Undo</button>
+    <button onClick={undo}>Undo</button>
     <button onClick={redo}>Redo</button>
     <span>      Search bar: </span><input onChange={event => setSearch(event.target.value)} />
 
@@ -81,12 +83,12 @@ const redo = () => {
       )
     )}
 
-  {/* {search && folders && folders.filter(folder => folder.name === search).map((folder, key) => (
+  {search && folders && folders.filter(folder => folder.name === search).map((folder, key) => (
           <React.Fragment key={key}>
           <FolderNew id={folder.id} />
           </React.Fragment>
       )
-    )} */}
+    )}
     </div>
     </Undo.Provider>
     // </Folders.Provider>

@@ -31,6 +31,27 @@ export function getData() {
   };
 }
 
+export function test() {
+  return dispatch => {
+    axios.get("https://api.jsonbin.io/b/60e69ab7fe016b59dd5f2435")
+    .then(res =>
+      dispatch({
+        type: "FetchTest",
+        data: res.data
+      })
+    );
+  };
+}
+
+// export const openFolder = (index) => {
+//   return (dispatch) => {
+//       dispatch({
+//           type: "OpenFolder",
+//           index: index
+//       });
+//   }
+// }
+
 export const openFolder = (index) => {
   return (dispatch) => {
       dispatch({
@@ -40,10 +61,40 @@ export const openFolder = (index) => {
   }
 }
 
-export const NewFolder = (newName, parent) => {
+export const showInput = (index) => {
   return (dispatch) => {
       dispatch({
-          type: "OpenFolder",
+          type: "ShowInput",
+          payload: index
+      });
+  }
+}
+
+export const showEdit = (index) => {
+  return (dispatch) => {
+      dispatch({
+          type: "ShowEdit",
+          payload: index
+      });
+  }
+}
+
+export const NewFolder = (index, editName) => {
+  return (dispatch) => {
+      dispatch({
+          type: "NewFolder",
+          payload: {
+            index,
+            editName
+          }
+      });
+  }
+}
+
+export const EditName = (newName, parent) => {
+  return (dispatch) => {
+      dispatch({
+          type: "EditName",
           payload: {
             newName,
             parent
@@ -51,3 +102,30 @@ export const NewFolder = (newName, parent) => {
       });
   }
 }
+
+export const DeleteFolder = (index) => {
+  return (dispatch) => {
+      dispatch({
+          type: "DeleteFolder",
+          payload: index
+      });
+  }
+}
+
+// export const Undo = (state) => {
+//   return (dispatch) => {
+//       dispatch({
+//           type: "Undo",
+//           payload: state
+//       });
+//   }
+// }
+
+// export const Redo = (state) => {
+//   return (dispatch) => {
+//       dispatch({
+//           type: "Redo",
+//           payload: state
+//       });
+//   }
+// }

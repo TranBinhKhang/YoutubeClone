@@ -5,6 +5,7 @@ import { openFolder } from '../Store/actions';
 
 function FolderNew({id}) {
   const folders = useSelector((state) => state.folder.data);
+  const TEST = useSelector((state) => state.folder);
   const dispatch = useDispatch();
 
 // const {folders, setFolders } = useContext(Folders);
@@ -14,42 +15,41 @@ const [newName, setNewName] = useState();
 const index = folders.findIndex(folder => folder.id === id);
 
 const open = () => {
-  dispatch({type:'OpenFolder',payload:index});
+  dispatch({type:'OpenFolder', payload: index});
 }
 
 const showFolder = () => {
     
-    let middle = JSON.parse(JSON.stringify(folders));
-    middle[index].showInput = !middle[index].showInput;
-    //setFolders(middle);
+    dispatch({type:'ShowInput', payload: index});
 }
 
 
 const showEditBar = () => {
-    
-    let middle = JSON.parse(JSON.stringify(folders));
-    middle[index].showEdit = !middle[index].showEdit;
-    //setFolders(middle);
+  dispatch({type:'ShowEdit', payload: index});
   }
 
   const deleteFolder = () => {
-    undoState.push(folders)
-    
-    let middle = JSON.parse(JSON.stringify(folders));
-    middle.splice(index, 1);
-    //setFolders(middle);
+    undoState.push(folders);
+    dispatch({type:'DeleteFolder', payload: index});
+    // let middle = JSON.parse(JSON.stringify(folders));
+    // middle.splice(index, 1);
+    // //setFolders(middle);
   }
 
   const editFolderName = () => {
     undoState.push(folders);
-    undoState.push(folders);
-    let middle = JSON.parse(JSON.stringify(folders));
-    middle[index].name = editName;
+    dispatch({type:'EditName', payload: {
+      editName: editName,
+      index: index
+    }});
+    // let middle = JSON.parse(JSON.stringify(folders));
+    // middle[index].name = editName;
     //setFolders(middle);
   }
 
   const addFolder = () => {
-    dispatch({type:'NewFolder',payload:{
+    undoState.push(folders);
+    dispatch({type:'NewFolder', payload:{
       newName: newName,
       parent: id
     }});
@@ -72,6 +72,7 @@ const showEditBar = () => {
   
   const handleFolderName = (e) => {
       setNewName(e.target.value);
+      console.log(newName);
     }
 
 
