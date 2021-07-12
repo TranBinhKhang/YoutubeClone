@@ -45,7 +45,19 @@ const folderReducer = (
                          "showEdit": false,
                          "parent": action.payload.parent,
                      })
-            }
+        }
+        case "NewFolderTop":
+            return {
+                ...state,
+                data: state.data.concat({  
+                        "id": Math.floor(Math.random() * (99999999999999999 - 1000 + 1)) + 1000,
+                         "name": action.payload,
+                         "isOpened": true,
+                         "showInput": false,
+                         "showEdit": false,
+                         "parent": null,
+                     })
+        }
         case "EditName":
             middle[action.payload.index].name = action.payload.editName;
             return {
@@ -56,8 +68,7 @@ const folderReducer = (
                 middle.splice(action.payload, 1)
                 return {
                     ...state,
-                    data: state.data.filter(index => index !== action.payload)
-                    
+                    data: state.data.filter(index => index !== action.payload) 
         }
         // case "Undo":
         //         return {

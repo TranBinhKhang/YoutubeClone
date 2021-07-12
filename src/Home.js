@@ -37,15 +37,16 @@ useEffect(() => {
 const upperAdd = () => {
     undoState.push(folders);
     console.log(undoState);
-    let middle = JSON.parse(JSON.stringify(folders));
-    middle.push({  
-        "id": Math.floor(Math.random() * (999999999 - 1000 + 1)) + 1000,
-        "name": upperName,
-        "isOpened": true,
-        "showInput": false,
-        "showEdit": false,
-        "parent": null,
-    })
+    dispatch({type:'NewFolderTop', payload: upperName});
+    // let middle = JSON.parse(JSON.stringify(folders));
+    // middle.push({  
+    //     "id": Math.floor(Math.random() * (999999999 - 1000 + 1)) + 1000,
+    //     "name": upperName,
+    //     "isOpened": true,
+    //     "showInput": false,
+    //     "showEdit": false,
+    //     "parent": null,
+    // })
 //  setFolders(middle);
 }
 

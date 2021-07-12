@@ -103,6 +103,15 @@ export const NewFolder = (newName, parent) => {
   }
 }
 
+export const NewFolderTop = (newName) => {
+  return (dispatch) => {
+      dispatch({
+          type: "NewFolder",
+          payload: newName
+      });
+  }
+}
+
 export const DeleteFolder = (index) => {
   return (dispatch) => {
       dispatch({
