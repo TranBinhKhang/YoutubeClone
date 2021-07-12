@@ -19,7 +19,6 @@ const open = () => {
 }
 
 const showFolder = () => {
-    
     dispatch({type:'ShowInput', payload: index});
 }
 

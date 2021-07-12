@@ -79,10 +79,10 @@ export const showEdit = (index) => {
   }
 }
 
-export const NewFolder = (index, editName) => {
+export const EditName = (index, editName) => {
   return (dispatch) => {
       dispatch({
-          type: "NewFolder",
+          type: "EditName",
           payload: {
             index,
             editName
@@ -91,10 +91,10 @@ export const NewFolder = (index, editName) => {
   }
 }
 
-export const EditName = (newName, parent) => {
+export const NewFolder = (newName, parent) => {
   return (dispatch) => {
       dispatch({
-          type: "EditName",
+          type: "NewFolder",
           payload: {
             newName,
             parent

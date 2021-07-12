@@ -9,20 +9,12 @@ const folderReducer = (
             return {
                 ...state,
                 data: action.data
-            }
+        }
         case "FetchTest":
             return {
                 ...state,
                 test: action.data
-            }
-        // case "OpenFolder":
-        //     const index = action.payload;
-        //     let middle = state.data;
-        //     middle[index].isOpened = !middle[index].isOpened
-        //     return {
-        //         ...state,
-        //         data: middle
-        //     }
+        }
         case "OpenFolder":  
             // let middle = state.data;
             middle[action.payload].isOpened = !middle[action.payload].isOpened;
