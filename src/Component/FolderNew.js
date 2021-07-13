@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { openFolder } from '../Store/actions';
 
 function FolderNew({id}) {
-  const folders = useSelector((state) => state.folder.data);
-  const TEST = useSelector((state) => state.folder);
+  useSelector((state) => state.folder);
+  const undoStack = useSelector((state) => (state.doState.undoStack));
+  const redoStack = useSelector((state) => (state.doState.redoStack));
+  const folders = useSelector((state) => (state.folder && state.folder.data) || []);
+
+
   const dispatch = useDispatch();
 
 // const {folders, setFolders } = useContext(Folders);
-const { undoState, setUndoState } = useContext(Undo);
 const [editName, setEditName] = useState();
 const [newName, setNewName] = useState();
 const index = folders.findIndex(folder => folder.id === id);
@@ -27,8 +30,11 @@ const showEditBar = () => {
   dispatch({type:'ShowEdit', payload: index});
   }
 
-  const deleteFolder = () => {
-    undoState.push(folders);
+const deleteFolder = () => {
+   
+    const middle = JSON.parse(JSON.stringify(folders));
+    dispatch({type:'UndoPush', payload: middle});
+    
     dispatch({type:'DeleteFolder', payload: index});
     // let middle = JSON.parse(JSON.stringify(folders));
     // middle.splice(index, 1);
@@ -36,7 +42,8 @@ const showEditBar = () => {
   }
 
   const editFolderName = () => {
-    undoState.push(folders);
+    const middle = JSON.parse(JSON.stringify(folders));  
+    dispatch({type:'UndoPush', payload: middle});
     dispatch({type:'EditName', payload: {
       editName: editName,
       index: index
@@ -47,7 +54,8 @@ const showEditBar = () => {
   }
 
   const addFolder = () => {
-    undoState.push(folders);
+    const middle = JSON.parse(JSON.stringify(folders));  
+    dispatch({type:'UndoPush', payload: middle});
     dispatch({type:'NewFolder', payload:{
       newName: newName,
       parent: id

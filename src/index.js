@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './Home';
 import reportWebVitals from './reportWebVitals';
-import { useDispatch, useSelector } from "react-redux";
-import { getData } from './Store/actions';
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk"
 import reducers from './Store/reducers';

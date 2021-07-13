@@ -13,30 +13,26 @@ function Home() {
 //     await axios.get("https://api.jsonbin.io/b/60e69ab7fe016b59dd5f2435").then(response => {setFolders(response.data)})
 //  }
 
+  useSelector((state) => state);
 
- 
-//  useEffect(() => {
-//     getFolders();
-//   }, []);
-const folders = useSelector((state) => state.folder.data);
-const TEST = useSelector((state) => state.folder);
-const dispatch = useDispatch(); //this hook gives us dispatch method
-useEffect(() => {
-  dispatch(getData());
-  // dispatch(test());
-  // getFolders();
-}, []);
+  const undoStack = useSelector((state) => (state.doState.undoStack));
+  const redoStack = useSelector((state) => (state.doState.redoStack));
+  const folders = useSelector((state) => (state.folder && state.folder.data) || []);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getData());
+  }, []);
   
-  const [undoState, setUndoState] = useState([]);
   const [upperTopInput, setUpperTopOutput] = useState(false);   
-  const [redoState, setRedoState] = useState([]);
   const [upperName, setUpperName] = useState();
   const [search, setSearch] = useState();
 
 
 const upperAdd = () => {
-    undoState.push(folders);
-    console.log(undoState);
+    // undoState.push(folders);
+    // console.log(undoState);
+    const middle = JSON.parse(JSON.stringify(folders));  
+    dispatch({type:'UndoPush', payload: middle});
     dispatch({type:'NewFolderTop', payload: upperName});
     // let middle = JSON.parse(JSON.stringify(folders));
     // middle.push({  
@@ -51,30 +47,41 @@ const upperAdd = () => {
 }
 
 const undo = () => {
-    if (undoState.length !== 0) {
-    redoState.push(folders);
+    if (undoStack.length !== 0) {
+    // redoState.push(folders);
+    // console.log(undoState);
     // setFolders(undoState.pop());
-    console.log(undoState);
+    // dispatch({type:'UndoState', payload: 'STuff'});
+    // console.log(undoState);
+    const middle = JSON.parse(JSON.stringify(folders));
+    dispatch({type:'RedoPush', payload: middle})
+    dispatch({type:'Undo', payload: undoStack.pop()})
     }
     else return;
 }
 
 const redo = () => {
-    if (redoState.length !== 0) {
-    undoState.push(folders);
-    // setFolders(redoState.pop());
-    console.log(redoState);
+    if (redoStack.length !== 0) {
+    // undoState.push(folders);
+    // dispatch({type:'Redo', payload: redoState.pop()});
+    // console.log(redoState);
+    const middle = JSON.parse(JSON.stringify(folders));
+    dispatch({type:'UndoPush', payload: middle})
+    dispatch({type:'Redo', payload: redoStack.pop()})
     }
     else return;
 }
 
   return (
     // <Folders.Provider value={{folders}}>
-    <Undo.Provider value={{undoState, setUndoState}}>
     <div >
     <button onClick={() => setUpperTopOutput(!upperTopInput)}>New Folder</button><span>   {upperTopInput && <div style={{float: 'inline-start'}}><input onChange={event => setUpperName(event.target.value)} /> <button onClick={upperAdd}>Add new folder</button></div>}</span>
     <button onClick={undo}>Undo</button>
     <button onClick={redo}>Redo</button>
+    {/* <button onClick={() => console.log(folders)}>Test folder state</button>
+    <button onClick={() => dispatch({type:'DoTest', payload: 'the reducer'})}>Add Undo state</button>
+    <button onClick={() => console.log(total)}>Test all state</button>
+    <button onClick={() => console.log(undoStack)}>Test current undo stack</button> */}
     <span>      Search bar: </span><input onChange={event => setSearch(event.target.value)} />
 
     {!search && folders && folders.filter(folder => folder.parent === null).map((folder, key) => (
@@ -91,7 +98,6 @@ const redo = () => {
       )
     )}
     </div>
-    </Undo.Provider>
     // </Folders.Provider>
   );
 }

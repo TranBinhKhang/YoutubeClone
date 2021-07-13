@@ -31,17 +31,17 @@ export function getData() {
   };
 }
 
-export function test() {
-  return dispatch => {
-    axios.get("https://api.jsonbin.io/b/60e69ab7fe016b59dd5f2435")
-    .then(res =>
-      dispatch({
-        type: "FetchTest",
-        data: res.data
-      })
-    );
-  };
-}
+// export function test() {
+//   return dispatch => {
+//     axios.get("https://api.jsonbin.io/b/60e69ab7fe016b59dd5f2435")
+//     .then(res =>
+//       dispatch({
+//         type: "FetchTest",
+//         data: res.data
+//       })
+//     );
+//   };
+// }
 
 // export const openFolder = (index) => {
 //   return (dispatch) => {
@@ -121,14 +121,63 @@ export const DeleteFolder = (index) => {
   }
 }
 
-// export const Undo = (state) => {
-//   return (dispatch) => {
-//       dispatch({
-//           type: "Undo",
-//           payload: state
-//       });
-//   }
-// }
+export const UndoState = (oldState) => {
+  return (dispatch) => {
+      dispatch({
+          type: "UndoState",
+          payload: oldState
+      });
+  }
+}
+
+export const RedoState = (newState) => {
+  return (dispatch) => {
+      dispatch({
+          type: "RedoState",
+          payload: newState
+      });
+  }
+}
+
+export const UndoPush = (oldState) => {
+  return (dispatch) => {
+      dispatch({
+          type: "UndoPush",
+          payload: oldState
+      });
+  }
+}
+
+export const RedoPush = (newState) => {
+  return (dispatch) => {
+      dispatch({
+          type: "RedoPush",
+          payload: newState
+      });
+  }
+}
+
+export const DoTest = (newState) => {
+  return (dispatch) => {
+      dispatch({
+          type: "DoTest",
+          payload: newState
+      });
+  }
+}
+
+
+
+
+
+export const Undo = (oldState) => {
+  return (dispatch) => {
+      dispatch({
+          type: "Undo",
+          payload: oldState
+      });
+  }
+}
 
 // export const Redo = (state) => {
 //   return (dispatch) => {

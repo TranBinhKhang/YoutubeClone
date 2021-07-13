@@ -1,6 +1,6 @@
 
 const folderReducer = (
-    state = [],
+    state = {data: []},
     action
 ) => {
     const middle = state.data
@@ -10,25 +10,17 @@ const folderReducer = (
                 ...state,
                 data: action.data
         }
-        case "FetchTest":
-            return {
-                ...state,
-                test: action.data
-        }
         case "OpenFolder":  
-            // let middle = state.data;
             middle[action.payload].isOpened = !middle[action.payload].isOpened;
             return {
             ...state,
         }
         case "ShowInput":
-            // let middle2 = state.data;
             middle[action.payload].showInput = !middle[action.payload].showInput;
             return {
             ...state,
         }
         case "ShowEdit":
-            // let middle2 = state.data;
             middle[action.payload].showEdit = !middle[action.payload].showEdit;
             return {
             ...state,
@@ -70,18 +62,19 @@ const folderReducer = (
                     ...state,
                     data: state.data.filter(index => index !== action.payload) 
         }
-        // case "Undo":
-        //         return {
-        //             ...state,
-        //             data: action.payload
-                    
-        // }
-        // case "Redo":
-        //         return {
-        //             ...state,
-        //             data: action.payload
-                    
-        // }
+        case "Undo":
+            console.log(action.payload)
+            let copyUndo = JSON.parse(JSON.stringify(action.payload)); // deep copy because shallow copy cause problem
+            return {
+                    ...state,
+                    data: copyUndo
+                }
+        case "Redo":
+            let copyRedo = JSON.parse(JSON.stringify(action.payload)); // deep copy because shallow copy cause problem
+            return {
+                    ...state,
+                    data: copyRedo
+                }
         default:
             return state
     }
