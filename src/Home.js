@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import FolderNew from './Component/FolderNew';
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from './Store/actions';
+import axios from 'axios';
 
 function Home() {
-useSelector((state) => state);
+const state = useSelector((state) => state);
 const undoStack = useSelector((state) => (state.doState.undoStack));
 const redoStack = useSelector((state) => (state.doState.redoStack));
 const folders = useSelector((state) => (state.folder && state.folder.data) || []);
@@ -23,7 +24,6 @@ const upperAdd = () => {
     dispatch({type:'UndoPush', payload: middle});
     dispatch({type:'NewFolderTop', payload: upperName});
 }
-
 const undo = () => {
     if (undoStack.length !== 0) {
     const middle = JSON.parse(JSON.stringify(folders));
@@ -40,12 +40,27 @@ const redo = () => {
     }
     else return;
 }
+
+const [username, setUsername] = useState();
+const [password, setPassword] = useState();
+const [showInfo, setShowInfo] = useState(false);
+
   return (
     <div >
+          <button onClick={() => axios.post('http://192.168.1.142:3000/api/info', {'token': localStorage.getItem('token')}).then(response => {setShowInfo(!showInfo); setUsername(response.data.username); setPassword(response.data.password)})}>Show user info</button><span>    <button onClick={() => {localStorage.removeItem('token'); dispatch({type:'LogOut'})}}>Logout</button></span>
+    <div style={{marginTop: 10}}>
+
+    {showInfo && username && password && <div>
+      <p>The username is {username}</p>
+      <p>The password is {password}</p>
+    </div>}
+
+
     <button onClick={() => setUpperTopOutput(!upperTopInput)}>New Folder</button><span>   {upperTopInput && <div style={{float: 'inline-start'}}><input onChange={event => setUpperName(event.target.value)} /> <button onClick={upperAdd}>Add new folder</button></div>}</span>
     <button onClick={undo}>Undo</button>
     <button onClick={redo}>Redo</button>
-    <span>      Search bar: </span><input onChange={event => setSearch(event.target.value)} />
+    <span>      Search bar: </span><input onChange={event => setSearch(event.target.value)} /></div>
+    <div style={{marginTop: 10}}>
     {!search && folders && folders.filter(folder => folder.parent === null).map((folder, key) => (
           <React.Fragment key={key}>
           <FolderNew id={folder.id} />
@@ -59,6 +74,7 @@ const redo = () => {
             </React.Fragment>
         )
     )}
+    </div>
     </div>
   );
 }

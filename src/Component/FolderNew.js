@@ -20,8 +20,8 @@ const showFolder = () => {
 
 
 const showEditBar = () => {
-  dispatch({type:'ShowEdit', payload: index});
-  }
+  dispatch({type:'ShowEdit', payload: index});  
+}
 
 const deleteFolder = () => {
     const middle = JSON.parse(JSON.stringify(folders));

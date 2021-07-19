@@ -135,3 +135,38 @@ export const Undo = (oldState) => {
       });
   }
 }
+
+export const setUsername = (name) => {
+  return (dispatch) => {
+      dispatch({
+          type: "SetUsername",
+          payload: name
+      });
+  }
+}
+
+export const setPassword = (password) => {
+  return (dispatch) => {
+      dispatch({
+          type: "setPassword",
+          payload: password
+      });
+  }
+}
+
+export const setUser = (token) => {
+  return (dispatch) => {
+      dispatch({
+          type: "SetUser",
+          payload: token
+      });
+  }
+}
+
+export const Logout = () => {
+  return (dispatch) => {
+      dispatch({
+          type: "LogOut"
+      });
+  }
+}

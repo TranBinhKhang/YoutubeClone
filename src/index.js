@@ -2,11 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './Home';
+import Login from './Login';
 import reportWebVitals from './reportWebVitals';
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk"
 import reducers from './Store/reducers';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import App from './App';
+
+
+// const user = useSelector((state) => state.account.user);
 
 export const folderStore = createStore(
     reducers,
@@ -15,11 +21,10 @@ export const folderStore = createStore(
 )
 
 
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={folderStore}>
-        <Home />
+        <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
