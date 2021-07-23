@@ -153,7 +153,7 @@ const users = [
       res.send(newFolder);
     });
 
-    app.post('/api/delete', async (req, res) =>{
+    app.post('/api/delete', authorization, async (req, res) =>{
       let newFolder = new Folder({
           id: req.body.id,
           name: req.body.name,
@@ -214,7 +214,7 @@ const users = [
     }
   });
 
-  app.post('/api/update', async (req, res) => {
+  app.post('/api/update', authorization, async (req, res) => {
     try {
       const updateItem = await List.findOne({ _id: req.body._id});
       updateItem.code = req.body.code;

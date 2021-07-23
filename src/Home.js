@@ -6,6 +6,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css"
 
 import FolderNavigate from './Component/FolderNavigate';
+import axiosConfig from './axiosConfig';
 
 function Home() {
 const state = useSelector((state) => state);
@@ -49,13 +50,6 @@ const redo = () => {
   const [password, setPassword] = useState();
   const [showInfo, setShowInfo] = useState(false);
 
-  let axiosConfig = {
-    headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-        "Access-Control-Allow-Origin": "*",
-        'x-auth-token': localStorage.getItem('token')
-    }
-  };
 
   return (
     <div>
