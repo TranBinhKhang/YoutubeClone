@@ -35,11 +35,13 @@ function AddNew() {
 
   return (
     <div style={{marginLeft: '18%'}}>
-
+    <div style={{  display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'}}><h3>Add new item</h3></div>
     <div style={{  display: 'flex',
   alignItems: 'center',
   justifyContent: 'center'}}>
-    <form style={{marginTop: '3%'}}>
+    <form>
     <label>Code</label><br/>
     <input onChange={event => setCode(event.target.value)} /><br/>
     <label>Name</label><br/>
