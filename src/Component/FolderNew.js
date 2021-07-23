@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
-function FolderNew({id}) {
+function FolderNew({id, onClick}) {
 useSelector((state) => state.folder);
 const folders = useSelector((state) => (state.folder && state.folder.data) || []);
 const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const handleFolderName = (e) => {
   return (
     <React.Fragment>
     <div style={{flex: 1}}>
-    <p style={{left: 40}}><span><button onClick={open}>{folders[index].isOpened ? '▲' : '▼' }</button></span>📁{folders[index].name}  <span><button onClick={() => {showFolder(); setNewName('New Folder')}}>+</button> <button onClick={() => {showEditBar(); setEditName(folders[index].name)}}>✏</button> <button onClick={deleteFolder}>🗑</button></span></p>
+    <p style={{left: 40}}><span><button onClick={open}>{folders[index].isOpened ? '▲' : '▼' }</button></span>📁<a href='#' onClick={open} >{folders[index].name}</a>  <span><button onClick={() => {showFolder(); setNewName('New Folder')}}>+</button> <button onClick={() => {showEditBar(); setEditName(folders[index].name)}}>✏</button> <button onClick={deleteFolder}>🗑</button></span></p>
     {folders[index].showInput && <div style={{float: 'inline-start', marginLeft: 30}}><input onChange={handleFolderName} /> <button onClick={addFolder}>Add new folder</button></div>}
     {folders[index].showEdit && <div style={{float: 'inline-start', marginLeft: 30}}><input onChange={handleEditChange} /> <button onClick={editFolderName}>Edit name</button></div>}
     </div>

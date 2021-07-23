@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export function getData() {
   return dispatch => {
-    axios.get("https://api.jsonbin.io/b/60e69ab7fe016b59dd5f2435")
+    axios.get("http://192.168.1.142:4000/api/folders")
     .then(res =>
       dispatch({
         type: "FetchFolder",
@@ -13,6 +13,88 @@ export function getData() {
   };
 }
 
+export function getCRUD() {
+  return dispatch => {
+    axios.get("http://192.168.1.142:4000/api/list")
+    .then(res =>
+      dispatch({
+        type: "FetchCRUD",
+        data: res.data
+      })
+    );
+  };
+}
+
+export function getUpdate(data) {
+  return dispatch => {
+      dispatch({
+        type: "FetchUpdate",
+        payload: data
+      })
+  };
+}
+
+export const EditCode = (data) => {
+  return (dispatch) => {
+      dispatch({
+          type: "EditCode",
+          payload: data
+      });
+    }
+}
+
+export const EditListName = (data) => {
+  return (dispatch) => {
+      dispatch({
+          type: "EditListName",
+          payload: data
+      });
+    }
+}
+
+export const EditCategory = (data) => {
+  return (dispatch) => {
+      dispatch({
+          type: "EditCategory",
+          payload: data
+      });
+    }
+}
+
+export const EditBudget = (data) => {
+  return (dispatch) => {
+      dispatch({
+          type: "EditBudget",
+          payload: data
+      });
+    }
+}
+
+export const EditStatus = (data) => {
+  return (dispatch) => {
+      dispatch({
+          type: "EditStatus",
+          payload: data
+      });
+    }
+}
+
+
+
+
+// export function deleteCRUD() {
+//   return dispatch => {
+//     axios.post('http://192.168.1.142:4000/api/deleteitem', {_id: rowData._id}, axiosConfig)
+//     .then(res =>
+//       dispatch({
+//         type: "FetchCRUD",
+//         data: res.data
+//       })
+//     );
+//   };
+// }
+
+
 export const openFolder = (index) => {
   return (dispatch) => {
       dispatch({
@@ -21,6 +103,16 @@ export const openFolder = (index) => {
       });
   }
 }
+
+export const setSelected = (index) => {
+  return (dispatch) => {
+      dispatch({
+          type: "SetSelected",
+          payload: index
+    });
+  }
+}
+
 
 export const showInput = (index) => {
   return (dispatch) => {
@@ -49,7 +141,7 @@ export const EditName = (index, editName) => {
             editName
           }
       });
-  }
+    }
 }
 
 export const NewFolder = (newName, parent) => {
@@ -61,8 +153,8 @@ export const NewFolder = (newName, parent) => {
             parent
           }
       });
+    }
   }
-}
 
 export const NewFolderTop = (newName) => {
   return (dispatch) => {

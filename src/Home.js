@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import FolderNew from './Component/FolderNew';
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from './Store/actions';
+import { getData, getCRUD } from './Store/actions';
 import axios from 'axios';
+import "bootstrap/dist/css/bootstrap.min.css"
+
+import FolderNavigate from './Component/FolderNavigate';
 
 function Home() {
 const state = useSelector((state) => state);
@@ -12,6 +15,7 @@ const folders = useSelector((state) => (state.folder && state.folder.data) || []
 const dispatch = useDispatch();
 useEffect(() => {
   dispatch(getData());
+  dispatch(getCRUD());
 }, []);
 
 const [upperTopInput, setUpperTopOutput] = useState(false);   
@@ -41,39 +45,69 @@ const redo = () => {
     else return;
 }
 
-const [username, setUsername] = useState();
-const [password, setPassword] = useState();
-const [showInfo, setShowInfo] = useState(false);
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [showInfo, setShowInfo] = useState(false);
+
+  let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*",
+        'x-auth-token': localStorage.getItem('token')
+    }
+  };
 
   return (
-    <div >
-          <button onClick={() => axios.post('http://192.168.1.142:3000/api/info', {'token': localStorage.getItem('token')}).then(response => {setShowInfo(!showInfo); setUsername(response.data.username); setPassword(response.data.password)})}>Show user info</button><span>    <button onClick={() => {localStorage.removeItem('token'); dispatch({type:'LogOut'})}}>Logout</button></span>
+    <div>
+    {/* <button onClick={() => axios.post('http://192.168.1.142:4000/api/info', {'token': localStorage.getItem('token')}).then(response => {setShowInfo(!showInfo); setUsername(response.data.username); setPassword(response.data.password)})}>Show user info</button><span>    <button onClick={() => {localStorage.removeItem('token'); dispatch({type:'LogOut'})}}>Logout</button></span>
     <div style={{marginTop: 10}}>
-
     {showInfo && username && password && <div>
       <p>The username is {username}</p>
       <p>The password is {password}</p>
     </div>}
 
 
-    <button onClick={() => setUpperTopOutput(!upperTopInput)}>New Folder</button><span>   {upperTopInput && <div style={{float: 'inline-start'}}><input onChange={event => setUpperName(event.target.value)} /> <button onClick={upperAdd}>Add new folder</button></div>}</span>
-    <button onClick={undo}>Undo</button>
-    <button onClick={redo}>Redo</button>
-    <span>      Search bar: </span><input onChange={event => setSearch(event.target.value)} /></div>
-    <div style={{marginTop: 10}}>
-    {!search && folders && folders.filter(folder => folder.parent === null).map((folder, key) => (
+    </div> */}
+
+
+
+
+
+
+    <div style={{ 
+    position: 'fixed',
+    height: '100%',
+    width: '17%',
+    // zIndex: 1, 
+    top: 0,      /* Stay at the top */
+    backgroundColor: "rgb(14, 77, 146)", 
+    overflowx: 'hidden',
+    padding: 5,}}>
+    
+    <button onClick={() => axios.post('http://192.168.1.142:4000/api/info', {"nothing": "nothing"}, axiosConfig).then(response => {setShowInfo(!showInfo); setUsername(response.data.username); setPassword(response.data.password)})}>Show user info</button><span>    <button onClick={() => {localStorage.removeItem('token'); dispatch({type:'LogOut'})}}>Logout</button></span>
+    {showInfo && username && password && <div>
+      <p>The username is {username}</p>
+      <p>The password is {password}</p>
+    </div>}
+    <hr style={{ borderWidth: 4,
+    borderColor: "#20232a",}} />
+    <div style={{marginBottom: 15}}>
+    <span style={{color: 'white'}}>Search: </span><input style={{marginTop: 10}} onChange={event => setSearch(event.target.value)} />
+    </div>
+    {!search && folders && folders.filter(folder => !folder.parent).map((folder, key) => (
           <React.Fragment key={key}>
-          <FolderNew id={folder.id} />
+          <FolderNavigate id={folder.id} />
           </React.Fragment>
       )
     )}
 
     {search && folders && folders.filter(folder => folder.name === search).map((folder, key) => (
             <React.Fragment key={key}>
-            <FolderNew id={folder.id} />
+            <FolderNavigate id={folder.id} />
             </React.Fragment>
         )
     )}
+    
     </div>
     </div>
   );

@@ -15,6 +15,12 @@ const folderReducer = (
             return {
             ...state,
         }
+        case "SetSelected":
+            middle.map(folder => folder.isSelected = false );  
+            middle[action.payload].isSelected = true;
+            return {
+            ...state,
+        }
         case "ShowInput":
             middle[action.payload].showInput = !middle[action.payload].showInput;
             return {

@@ -19,10 +19,9 @@ function Login() {
             username: username,
             password: password
         }
-        axios.post('http://192.168.1.142:3000/api/login', credential).then(response => {dispatch({type:'SetUser', payload: response.data}); localStorage.setItem('token', response.data)})
+        axios.post('http://192.168.1.142:4000/api/login', credential).then(response => {dispatch({type:'SetUser', payload: response.data}); localStorage.setItem('token', response.data)})
         console.log(credential);
     }
-
 
     // console.log(state);
     return (
