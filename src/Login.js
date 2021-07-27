@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { useDispatch, useSelector } from "react-redux";
-const sign = require('jwt-encode');
+
+import { api } from "./config.json";
+
 
 
 function Login() {
@@ -19,7 +21,7 @@ function Login() {
             username: username,
             password: password
         }
-        axios.post('http://192.168.1.142:4000/api/login', credential).then(response => {dispatch({type:'SetUser', payload: response.data}); localStorage.setItem('token', response.data)})
+        axios.post(api + 'login', credential).then(response => {dispatch({type:'SetUser', payload: response.data}); localStorage.setItem('token', response.data)})
         console.log(credential);
     }
 

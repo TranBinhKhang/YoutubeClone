@@ -9,6 +9,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { getCRUD } from './Store/actions';
 
+import { api } from "./config.json";
+
+
 
 function AddNew() {
 
@@ -30,7 +33,7 @@ function AddNew() {
       status: status
     }
     console.log(stuff);
-    axios.post('http://192.168.1.142:4000/api/additem', stuff, axiosConfig);
+    axios.post(api + '/additem', stuff, axiosConfig);
   }
 
   return (

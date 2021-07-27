@@ -9,7 +9,9 @@ import CRUD from './CRUD';
 import Login from './Login';
 import AddNew from './AddNew';
 import Edit from './Edit';
-
+import FolderCRUD from './FolderCRUD';
+import FolderEdit from './FolderEdit';
+import FolderAdd from './FolderAdd';
 
 function App() {
   useSelector((state) => state.account);
@@ -21,6 +23,9 @@ function App() {
     <Switch>
       <Route exact path="/edit" component={Edit} />
       <Route exact path="/folder" component={FolderPage} />
+      <Route exact path="/foldercrud" component={FolderCRUD} />
+      <Route exact path="/folderadd" component={FolderAdd} />
+      <Route exact path="/folderedit" component={FolderEdit} />
       <Route exact path="/crud" component={CRUD} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/add" component={AddNew} />

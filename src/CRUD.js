@@ -27,6 +27,9 @@ import axios from 'axios';
 import axiosConfig from './axiosConfig';
 // import { save } from '@material-ui/icons';
 
+import { api } from "./config.json";
+
+
 
 function CRUD() {
   const dispatch = useDispatch();
@@ -62,12 +65,12 @@ function CRUD() {
   const list = useSelector((state) => (state.list.list));
 
   const fetchUpdate = async (_id) => {
-    await axios.post('http://192.168.1.142:4000/api/fetchupdate', {_id: _id}, axiosConfig)
+    await axios.post(api + '/fetchupdate', {_id: _id}, axiosConfig)
     .then(res => dispatch({type:'FetchUpdate', payload: res.data}))
   }
 
   const deleteItem = async (_id) => {
-    await axios.post('http://192.168.1.142:4000/api/deleteitem', {_id: _id}, axiosConfig);
+    await axios.post(api + '/deleteitem', {_id: _id}, axiosConfig);
     dispatch(getCRUD());
   }
 

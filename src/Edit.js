@@ -8,6 +8,8 @@ import axiosConfig from './axiosConfig';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { getCRUD } from './Store/actions';
+import { api } from "./config.json";
+
 
 
 function Edit() {
@@ -25,7 +27,7 @@ function Edit() {
       status: update.status
     }
     console.log(stuff);
-    await axios.post('http://192.168.1.142:4000/api/update', stuff, axiosConfig);
+    await axios.post(api + '/update', stuff, axiosConfig);
     dispatch(getCRUD());
   }
 

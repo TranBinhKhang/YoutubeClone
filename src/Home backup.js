@@ -6,6 +6,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css"
 
 import FolderNavigate from './Component/FolderNavigate';
+import { api } from "./config.json";
 
 function FolderPage() {
 const state = useSelector((state) => state);
@@ -50,7 +51,7 @@ const [showInfo, setShowInfo] = useState(false);
 
   return (
     <div>
-          <button onClick={() => axios.post('http://192.168.1.142:4000/api/info', {'token': localStorage.getItem('token')}).then(response => {setShowInfo(!showInfo); setUsername(response.data.username); setPassword(response.data.password)})}>Show user info</button><span>    <button onClick={() => {localStorage.removeItem('token'); dispatch({type:'LogOut'})}}>Logout</button></span>
+          <button onClick={() => axios.post(api + 'info', {'token': localStorage.getItem('token')}).then(response => {setShowInfo(!showInfo); setUsername(response.data.username); setPassword(response.data.password)})}>Show user info</button><span>    <button onClick={() => {localStorage.removeItem('token'); dispatch({type:'LogOut'})}}>Logout</button></span>
     <div style={{marginTop: 10}}>
 
     {showInfo && username && password && <div>

@@ -1,9 +1,11 @@
 import axios from 'axios';
+import { api } from "../config.json";
+
 
 
 export function getData() {
   return dispatch => {
-    axios.get("http://192.168.1.142:4000/api/folders")
+    axios.get(api + "/folders")
     .then(res =>
       dispatch({
         type: "FetchFolder",
@@ -15,7 +17,7 @@ export function getData() {
 
 export function getCRUD() {
   return dispatch => {
-    axios.get("http://192.168.1.142:4000/api/list")
+    axios.get(api + "/list")
     .then(res =>
       dispatch({
         type: "FetchCRUD",
@@ -33,6 +35,43 @@ export function getUpdate(data) {
       })
   };
 }
+
+export function GetFolderUpdate(data) {
+  return dispatch => {
+      dispatch({
+        type: "FolderUpdate",
+        payload: data
+      })
+  };
+}
+
+export const UpdateName = (data) => {
+  return (dispatch) => {
+      dispatch({
+          type: "UpdateName",
+          payload: data
+      });
+    }
+}
+
+export const UpdateId = (data) => {
+  return (dispatch) => {
+      dispatch({
+          type: "UpdateId",
+          payload: data
+      });
+    }
+}
+
+export const UpdateParent = (data) => {
+  return (dispatch) => {
+      dispatch({
+          type: "UpdateParent",
+          payload: data
+      });
+    }
+}
+
 
 export const EditCode = (data) => {
   return (dispatch) => {

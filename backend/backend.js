@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const Joi = require("joi");
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const cors = require('cors');
@@ -143,24 +144,72 @@ const users = [
       res.send(folders);
     });
 
+    const validateFolderSchema = Joi.object({
+      _id: Joi.string(),
+      id: Joi.number().required().messages({
+        "number.base": `Id should be a number`,
+        "number.empty": `Id cannot be an empty field`,
+        "any.required": `Id is a required field`
+      }),
+      name: Joi.string().required().messages({
+        'string.base': `Name should be a string`,
+        'string.empty': `Name cannot be an empty field`,
+        'any.required': `Name is a required field`
+      }),
+      parent: Joi.number().required().messages({
+        "number.base": `Parent should be a type of 'number'`,
+        "number.empty": `Parent cannot be an empty field`,
+        "any.required": `Parent is a required field`
+      }),
+    });
+
     app.post('/api/addfolder', authorization, async (req, res) =>{
+      const validation = validateFolderSchema.validate(req.body);
+      if (validation.error) res.status(400).json(validation.error.details[0].message);
+      else {
       const newFolder = new Folder({
           id: req.body.id,
           name: req.body.name,
           parent: req.body.parent
       });
       await newFolder.save();
-      res.send(newFolder);
+      res.send('gaylord');
+    }
     });
 
-    app.post('/api/delete', authorization, async (req, res) =>{
-      let newFolder = new Folder({
-          id: req.body.id,
-          name: req.body.name,
-          parent: req.body.parent
-      });
-      await newFolder.save();
-      res.send(newFolder);
+    app.post('/api/deletefolder', authorization, async (req, res) =>{
+      try {
+        const folder = await Folder.findOne({ _id: req.body._id});
+        folder.remove();
+        res.send('delete' + folder.name);
+      }
+      catch(err) {
+          res.send(err)
+      }
+    });
+
+    app.post('/api/updatefolder', authorization, async (req, res) => {
+      const validation = validateFolderSchema.validate(req.body);
+      if (validation.error) res.status(400).json(validation.error.details[0].message);
+      else {
+        const folder = await Folder.findOne({ _id: req.body._id});
+        folder.id = req.body.id;
+        folder.name = req.body.name;
+        folder.parent = req.body.parent;
+        folder.save();
+        res.send(folder);
+        console.log('running');
+      }
+    });
+
+    app.post('/api/folderupdate', async (req, res) => {
+      try {
+        let item = await Folder.findOne({ _id: req.body._id});
+        res.send(item);
+      }
+      catch(err) {
+          res.send(err)
+      }
     });
 
     app.post('/api/info', authorization, async (req, res) => {
