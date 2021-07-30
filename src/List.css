@@ -1,22 +1,5 @@
-.App {
-  text-align: left;
-  background-color: rgb(240,240,240);
-  height: 100vh;
-  box-sizing: content-box;
-}
-
-span {
-  display: inline-block;
-}
-
-.Sidebar {
-  position: absolute;
-  text-align: left;
-  background-color: rgb(14, 77, 146);
-  height: 100vh;
-  overflow-x: hidden;
-  z-index: 1000;
-  top: 0;
+ul {
+  list-style-type: none;
 }
 
 /* .App-logo {
@@ -28,9 +11,9 @@ span {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-} */
+}
 
-/* .App-header {
+.App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;

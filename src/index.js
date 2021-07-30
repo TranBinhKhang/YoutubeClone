@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import Home from './Home';
+// import './index.css';
+import Sidebar from './Sidebar';
 import Login from './Login';
 import reportWebVitals from './reportWebVitals';
 import { createStore, applyMiddleware } from "redux";

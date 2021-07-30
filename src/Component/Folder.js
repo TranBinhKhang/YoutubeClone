@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../List.css';
+
 
 function Folder({name, isOpened, open, add, edit, remove}) {
   // Declare a new state variable, which we'll call "count"

@@ -10,7 +10,7 @@ import axiosConfig from './axiosConfig';
 import { api } from "./config.json";
 
 
-function Home() {
+function Sidebar() {
 const state = useSelector((state) => state);
 const undoStack = useSelector((state) => (state.doState.undoStack));
 const redoStack = useSelector((state) => (state.doState.redoStack));
@@ -54,41 +54,22 @@ const redo = () => {
 
 
   return (
-    <div>
-    {/* <button onClick={() => axios.post('http://192.168.1.142:4000/api/info', {'token': localStorage.getItem('token')}).then(response => {setShowInfo(!showInfo); setUsername(response.data.username); setPassword(response.data.password)})}>Show user info</button><span>    <button onClick={() => {localStorage.removeItem('token'); dispatch({type:'LogOut'})}}>Logout</button></span>
-    <div style={{marginTop: 10}}>
-    {showInfo && username && password && <div>
-      <p>The username is {username}</p>
-      <p>The password is {password}</p>
-    </div>}
-
-
-    </div> */}
-
-
-
-
-
-
-    <div style={{ 
-    position: 'fixed',
-    height: '100%',
-    width: '17%',
-    // zIndex: 1, 
-    top: 0,      /* Stay at the top */
-    backgroundColor: "rgb(14, 77, 146)", 
-    overflowx: 'hidden',
-    padding: 5,}}>
+    <span className='Sidebar' style={{ 
+}}>
     
-    <button onClick={() => axios.post(api + '/info', {"nothing": "nothing"}, axiosConfig).then(response => {setShowInfo(!showInfo); setUsername(response.data.username); setPassword(response.data.password)})}>Show user info</button><span>    <button onClick={() => {localStorage.removeItem('token'); dispatch({type:'LogOut'})}}>Logout</button></span>
-    {showInfo && username && password && <div>
+    <div style={{backgroundColor: '#002D62'}}>
+    {/* <button onClick={() => axios.post(api + '/info', {"nothing": "nothing"}, axiosConfig).then(response => {setShowInfo(!showInfo); setUsername(response.data.username); setPassword(response.data.password)})}>Show user info</button><span>    <button onClick={() => {localStorage.removeItem('token'); dispatch({type:'LogOut'})}}>Logout</button></span> */}
+    {/* {showInfo && username && password && <div>
       <p>The username is {username}</p>
       <p>The password is {password}</p>
-    </div>}
-    <hr style={{ borderWidth: 4,
-    borderColor: "#20232a",}} />
+    </div>} */}
+    <p style={{fontWeight: 'bold', color: 'white', fontSize: '20px', textAlign: 'center'}}>Folder list app</p>
+    <hr style={{ height: 5,
+    backgroundColor: 'white'}} />
+    </div>
+    <div>
     <div style={{marginBottom: 15}}>
-    <span style={{color: 'white'}}>Search: </span><input style={{marginTop: 10}} onChange={event => setSearch(event.target.value)} />
+    <span style={{color: 'white'}}>Search: </span><input style={{marginLeft: '1%', width: '70%'}} onChange={event => setSearch(event.target.value)} />
     </div>
     {!search && folders && folders.filter(folder => !folder.parent).map((folder, key) => (
           <React.Fragment key={key}>
@@ -102,11 +83,9 @@ const redo = () => {
             <FolderNavigate id={folder.id} />
             </React.Fragment>
         )
-    )}
-    
-    </div>
-    </div>
+    )}</div>
+    </span>
   );
 }
 
-export default Home;
+export default Sidebar;

@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import React, {forwardRef, useState, useEffect} from 'react';
-import './App.css';
+// import './App.css';
 import { useDispatch, useSelector } from "react-redux";
-import Home from './Home';
+import Sidebar from './Sidebar';
 import Login from './Login';
 import { Link, useHistory } from 'react-router-dom';
 import MaterialTable from 'material-table';

@@ -1,36 +1,20 @@
 .App {
-  text-align: left;
-  background-color: rgb(240,240,240);
-  height: 100vh;
-  box-sizing: content-box;
+  text-align: center;
+  background-color: red;
 }
 
-span {
-  display: inline-block;
-}
-
-.Sidebar {
-  position: absolute;
-  text-align: left;
-  background-color: rgb(14, 77, 146);
-  height: 100vh;
-  overflow-x: hidden;
-  z-index: 1000;
-  top: 0;
-}
-
-/* .App-logo {
+.App-logo {
   height: 40vmin;
   pointer-events: none;
-} */
+}
 
-/* @media (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-} */
+}
 
-/* .App-header {
+.App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -52,4 +36,4 @@ span {
   to {
     transform: rotate(360deg);
   }
-} */
+}

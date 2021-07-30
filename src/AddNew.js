@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import { useDispatch, useSelector } from "react-redux";
-import Home from './Home';
+import Sidebar from './Sidebar';
 import Login from './Login';
 import axiosConfig from './axiosConfig';
 import axios from 'axios';

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import '../List.css';
+
 
 function FolderNew({id, onClick}) {
 useSelector((state) => state.folder);
