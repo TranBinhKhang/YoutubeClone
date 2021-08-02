@@ -32,7 +32,7 @@ function Edit() {
   }
 
   return (
-    <div style={{marginLeft: '18%'}}>
+    <div>
     <div style={{  display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'}}><h3>Update item</h3></div>

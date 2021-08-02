@@ -12,6 +12,9 @@ import Edit from './Edit';
 import FolderCRUD from './FolderCRUD';
 import FolderEdit from './FolderEdit';
 import FolderAdd from './FolderAdd';
+import axios from 'axios';
+import axiosConfig from './axiosConfig';
+import { api } from "./config.json";
 
 function App() {
   useSelector((state) => state.account);
@@ -36,6 +39,8 @@ function App() {
   )
 
 
+  const fetchUser = async () => await axios.post(api + '/info', {"nothing": "nothing"}, axiosConfig).then( res => dispatch({type:'SetUsername', payload: res.data.username}))
+
   const automaticLogin = () => {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -44,13 +49,14 @@ function App() {
 
   useEffect(() => {
     automaticLogin();
+    fetchUser();
   }, [])
   
   return (
     <React.Fragment>
       <BrowserRouter>
         {/* {!user ? <Login /> : <React.Fragment><span className='Sidebar'><Sidebar/></span><span className='App'><Routers/></span></React.Fragment>} */}
-      <div style={{display: 'flex', flexDirection: 'row'}}><Sidebar /><Default /></div>
+        {!user ? <Login /> :  <div className='Flex-Container'><div><Sidebar /></div><div className='Flex-Child'><Routers /></div></div>}
       </BrowserRouter>
     </React.Fragment>
   );
@@ -75,5 +81,6 @@ function Default() {
     </span>
   );
 }
+
 
 export default App;

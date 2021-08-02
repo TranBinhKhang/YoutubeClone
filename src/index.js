@@ -10,6 +10,8 @@ import reducers from './Store/reducers';
 import { Provider } from 'react-redux';
 import { useDispatch, useSelector } from "react-redux";
 import App from './App';
+import "bootstrap/dist/css/bootstrap.min.css"
+
 
 
 // const user = useSelector((state) => state.account.user);

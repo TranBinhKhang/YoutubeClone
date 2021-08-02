@@ -75,7 +75,7 @@ function CRUD() {
   }
 
   return (
-    <div style={{marginLeft: '18%'}}>
+    <div>
 
     <div style={{  display: 'flex',
     alignItems: 'center',

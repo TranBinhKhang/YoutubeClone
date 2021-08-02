@@ -152,6 +152,24 @@ export const setSelected = (index) => {
   }
 }
 
+export const openItem = (index) => {
+  return (dispatch) => {
+      dispatch({
+          type: "OpenItem",
+          payload: index
+      });
+  }
+}
+
+export const selectItem = (index) => {
+  return (dispatch) => {
+      dispatch({
+          type: "SelectItem",
+          payload: index
+    });
+  }
+}
+
 
 export const showInput = (index) => {
   return (dispatch) => {

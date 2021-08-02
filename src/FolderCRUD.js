@@ -77,7 +77,7 @@ function FolderCRUD() {
   }
 
   return (
-    <div style={{marginLeft: '18%'}}>
+    <div>
 
     <div style={{  display: 'flex',
     alignItems: 'center',
@@ -89,14 +89,18 @@ function FolderCRUD() {
     </div>
     </div>
     <MaterialTable
+    // style={{width: 1200}}
       icons={tableIcons}
       title="Folder CRUD"
       data={folders}
       columns={[
-        { title: 'ID', field: 'id' },
-        { title: 'Name', field: 'name' },
+        { title: 'ID', field: 'id', width: '5%' },
+        { title: 'Name', field: 'name', width: '5%' }
       ]}
       parentChildData={(row, rows) => rows.find(a => a.id === row.parent)}
+      // rowStyle= {rowData => ({
+      //   backgroundColor: !!rowData.parentOnly ? "#EEE" : "#333"
+      // })}
       actions={[
         {
           icon: Edit,
@@ -110,7 +114,13 @@ function FolderCRUD() {
         })
       ]}
       options={{
-        actionsColumnIndex: -1
+        actionsColumnIndex: -1,
+        // selection: true,
+        padding: 'dense',
+        pageSize: 10,
+        pageSizeOptions: [10, 15, 20],
+
+
       }}
     />
     </div>

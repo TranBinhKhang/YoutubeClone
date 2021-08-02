@@ -21,7 +21,7 @@ function Login() {
             username: username,
             password: password
         }
-        axios.post(api + 'login', credential).then(response => {dispatch({type:'SetUser', payload: response.data}); localStorage.setItem('token', response.data)})
+        axios.post(api + '/login', credential).then(response => {dispatch({type:'SetUser', payload: response.data}); localStorage.setItem('token', response.data)})
         console.log(credential);
     }
 

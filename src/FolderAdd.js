@@ -40,20 +40,36 @@ function FolderAdd() {
   }
 
   return (
-    <div style={{marginLeft: '18%'}}>
-      <button onClick={submit}>test</button>
+    <div style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+
+
+
+
+    <div style={{  display: 'flex',
+    backgroundColor: 'white',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '55vh',
+    height: '75vh',
+    marginTop: '-10vh',
+    borderRadius: '2vh',
+    paddingBottom: '25vh',
+    justifyContent: 'center',
+    border: '1px solid rgb(14, 77, 146)'
+    }}>
     <div style={{  display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'}}><h3>Add new item</h3></div>
-    <div style={{  display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'}}>
+    justifyContent: 'center', color: 'rgb(14, 77, 146)'}}><h3>New Folder Form</h3></div>
     <form>
-    <p style={{color: 'red'}}>{error && error}</p>
+    
     <label>ID</label><br/>
-    <input onChange={event => setId(event.target.value)} /><br/>
+    <input 
+     style={{ borderColor: `rgb(14, 77, 146)`, borderTop: 'none', borderLeft: 'none', borderRight: 'none', borderBottomStyle: 'solid', borderBottomWidth: 1, cursor: 'auto', padding: 5, marginBottom: 20, outline: 'none' }}
+     onChange={event => setId(event.target.value)} /><br/>
     <label>Name</label><br/>
-    <input onChange={event => setName(event.target.value)} /><br/>
+    <input 
+    style={{ borderColor: `rgb(14, 77, 146)`, borderTop: 'none', borderLeft: 'none', borderRight: 'none', borderBottomStyle: 'solid', borderBottomWidth: 1  , padding: 5, marginBottom: 20, outline: 'none' }}
+    onChange={event => setName(event.target.value)} /><br/>
     <label>Parent</label><br/>
     <Dropdown
     placeholder="Select an option"
@@ -64,7 +80,8 @@ function FolderAdd() {
     <label> </label><br/>
     {/* <input type="submit" onClick={() => {submit(); dispatch(getData());
     }} /> */}
-    <button onClick={submit}>Submit</button>
+    <button className="btn btn-danger btn-block" style={{backgroundColor: 'rgb(14, 77, 146)', border: 'rgb(14, 77, 146)', outline: 'none'}} onClick={submit}>Submit</button> <span style={{color: 'red', fontWeight: 'bold'}}>{error && error}</span>
+
     </form> 
  
     </div>

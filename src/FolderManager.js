@@ -46,7 +46,7 @@ const [password, setPassword] = useState();
 const [showInfo, setShowInfo] = useState(false);
 
   return (
-    <div style={{marginLeft: '18%'}}>
+    <div>
     <div style={{marginTop: 10}}>
 
     {showInfo && username && password && <div>

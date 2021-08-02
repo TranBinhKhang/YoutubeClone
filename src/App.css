@@ -1,23 +1,72 @@
 .App {
   text-align: left;
-  background-color: rgb(240,240,240);
+  background-color: rgb(245,245,245);
   height: 100vh;
   box-sizing: content-box;
 }
 
-span {
-  display: inline-block;
+Body {
+  background-color: rgb(242,242,242);
+}
+
+.Flex-Child {
+  flex: 1;
+}
+
+.Flex-Container {
+  display: flex;
+  flex-direction: row;
+}
+
+.react-icons {
+  vertical-align: middle;
 }
 
 .Sidebar {
-  position: absolute;
+  position: sticky;
   text-align: left;
   background-color: rgb(14, 77, 146);
   height: 100vh;
   overflow-x: hidden;
   z-index: 1000;
-  top: 0;
+  top: 0px;
 }
+
+label {
+  font-weight: bold;
+  color: rgb(14, 77, 146);
+}
+
+.Footer {
+  color: white;
+  background-color: #002D62;
+}
+
+.blueinput {
+  border-color: blue; 
+  border-top: none; 
+  border-left: none;
+  border-right: none;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  cursor: auto; 
+  padding: 5px;
+  margin-bottom: 20px 
+}
+
+.Header {
+  color: white;
+  position: sticky;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 5px;
+  background-color: rgb(255,255,255);
+}
+
+hr{
+  margin: 0;
+}
+
 
 /* .App-logo {
   height: 40vmin;
