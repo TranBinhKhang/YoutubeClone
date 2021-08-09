@@ -1,5 +1,5 @@
 import axios from "axios"
-import axiosConfig from "../axiosConfig"
+import axiosConfig from "../Utils/axiosConfig"
 
 const listReducer = (
     state = {list: undefined, update: {}, folder: {}},

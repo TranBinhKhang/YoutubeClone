@@ -1,12 +1,11 @@
-import logo from './logo.svg';
 import React, {forwardRef, useState, useEffect} from 'react';
-// import './App.css';
+import '../../App.css';
 import { useDispatch, useSelector } from "react-redux";
-import Sidebar from './Sidebar';
-import Login from './Login';
+import Sidebar from '../../Components/Sidebar';
+import Login from '../Login/Login';
 import { Link, useHistory } from 'react-router-dom';
 import MaterialTable from 'material-table';
-import { getData, getCRUD } from './Store/actions';
+import { getData, getCRUD } from '../../Store/actions';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
@@ -24,10 +23,10 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { ArrowUpward, Refresh } from '@material-ui/icons';
 import axios from 'axios';
-import axiosConfig from './axiosConfig';
+import axiosConfig from '../../Utils/axiosConfig';
 // import { save } from '@material-ui/icons';
 
-import { api } from "./config.json";
+import { api } from "../../config.json";
 
 
 

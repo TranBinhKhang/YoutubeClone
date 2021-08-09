@@ -1,15 +1,12 @@
-import logo from './logo.svg';
+
 import React, {useEffect, useState} from 'react';
-import './App.css';
 import { useDispatch, useSelector } from "react-redux";
-import Sidebar from './Sidebar';
-import Login from './Login';
-import axiosConfig from './axiosConfig';
+import axiosConfig from '../../Utils/axiosConfig';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { getCRUD } from './Store/actions';
+import { getCRUD } from '../../Store/actions';
 
-import { api } from "./config.json";
+import { api } from "../../config.json";
 
 
 

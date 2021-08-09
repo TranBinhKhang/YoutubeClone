@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import FolderNew from './Component/FolderNew';
+import FolderNew from '../../Components/FolderNew';
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from './Store/actions';
+import { getData } from '../../Store/actions';
 import axios from 'axios';
 
 function Home() {

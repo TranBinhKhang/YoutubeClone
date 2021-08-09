@@ -2,18 +2,18 @@ import logo from './logo.svg';
 import React, {useEffect} from 'react';
 // import './App.css';
 import { useDispatch, useSelector } from "react-redux";
-import Sidebar from './Sidebar';
+import Sidebar from './Components/Sidebar';
 import { Route, Switch, Redirect, BrowserRouter, useLocation } from 'react-router-dom';
-import FolderPage from './FolderManager';
-import CRUD from './CRUD';
-import Login from './Login';
-import AddNew from './AddNew';
-import Edit from './Edit';
-import FolderCRUD from './FolderCRUD';
-import FolderEdit from './FolderEdit';
-import FolderAdd from './FolderAdd';
+import FolderPage from './Pages/FolderPage/FolderPage';
+import CRUD from './Pages/oldCRUD/CRUD';
+import Login from './Pages/Login/Login';
+import AddNew from './Pages/oldCRUD/AddNew';
+import Edit from './Pages/oldCRUD/Edit';
+import FolderCRUD from './Pages/folderCRUD/FolderCRUD';
+import FolderEdit from './Pages/folderCRUD/FolderEdit';
+import FolderAdd from './Pages/folderCRUD/FolderAdd';
 import axios from 'axios';
-import axiosConfig from './axiosConfig';
+import axiosConfig from './Utils/axiosConfig';
 import { api } from "./config.json";
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
       <Route exact path="/folderadd" component={FolderAdd} />
       <Route exact path="/folderedit" component={FolderEdit} />
       <Route exact path="/crud" component={CRUD} />
-      <Route exact path="/login" component={Login} />
+      {/* <Route exact path="/login" component={Login} /> */}
       <Route exact path="/add" component={AddNew} />
       <Route exact path="/" component={Default} />
       <Route path="*" component={NoMatch} />

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import FolderNew from './Component/FolderNew';
+import FolderNew from './FolderNew';
 import { useDispatch, useSelector } from "react-redux";
-import { getData, getCRUD } from './Store/actions';
+import { getData, getCRUD } from '../Store/actions';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Link } from 'react-router-dom';
-import NavigationItem from './Component/NavigationItem';
+import NavigationItem from './NavigationItem';
 import { SvgIcon } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import FolderIcon from '@material-ui/icons/Folder';
 import { AiFillFolderOpen } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import FolderNavigate from './Component/FolderNavigate';
-import axiosConfig from './axiosConfig';
-import { api } from "./config.json";
+import FolderNavigate from './FolderNavigate';
+import axiosConfig from '../Utils/axiosConfig';
+import { api } from "../config.json";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { useDispatch, useSelector } from "react-redux";
 
-import { api } from "./config.json";
+import { api } from "../../config.json";
 
 
 
