@@ -1,21 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import FolderNew from './FolderNew';
 import { useDispatch, useSelector } from "react-redux";
-import { getData, getCRUD } from '../Store/actions';
-import axios from 'axios';
+import { getData } from '../Store/actions';
 import "bootstrap/dist/css/bootstrap.min.css"
-import { Link } from 'react-router-dom';
 import NavigationItem from './NavigationItem';
-import { SvgIcon } from '@material-ui/core';
-import SettingsIcon from '@material-ui/icons/Settings';
-import FolderIcon from '@material-ui/icons/Folder';
-import { AiFillFolderOpen } from "react-icons/ai";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import FolderNavigate from './FolderNavigate';
-import axiosConfig from '../Utils/axiosConfig';
-import { api } from "../config.json";
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+
 
 
 
@@ -29,7 +17,6 @@ const folders = useSelector((state) => (state.folder && state.folder.data) || []
 const dispatch = useDispatch();
 useEffect(() => {
   dispatch(getData());
-  dispatch(getCRUD());
 }, []);
 
 const placeholder = 'https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png';
@@ -50,12 +37,12 @@ const [anchorEl, setAnchorEl] = useState(null);
 
 
   return (
-    <div className='Sidebar' style={{ flex: 1, display: 'flex', flexDirection: 'column'
+    <div className='Sidebar' style={{ flex: 1, width: 128, display: 'flex', flexDirection: 'column'
 }}>
     
-
+{/* 
     <div style={{
-    backgroundColor: '#002D62',
+    backgroundColor: 'black',
     height: '7vh',
     display: 'flex',
     alignItems: 'center',
@@ -64,10 +51,10 @@ const [anchorEl, setAnchorEl] = useState(null);
     justifyContent: 'center'
     }}>
     <div style={{fontWeight: 'bold', flex: 1, color: 'white', fontSize: '20px', textAlign: 'center'}}><AiFillFolderOpen style={{verticalAlign: 'middle'}}/>   Folder App</div>
-    </div>  
-    <div style={{marginTop: '7%'}}>
+    </div>   */}
+    <div>
     <div style={{marginBottom: 10}}>
-    <input style={{marginInline: 5, borderRadius: 5, borderColor: 'teal'}} placeholder={'Search...'} onChange={event => setSearch(event.target.value)} />
+    {/* <input style={{marginInline: 5, borderRadius: 5, borderColor: 'teal'}} placeholder={'Search...'} onChange={event => setSearch(event.target.value)} /> */}
     </div>
     {!search && items && items.filter(item => !item.parent).map((item, key) => (
           <React.Fragment key={key}>
@@ -84,9 +71,9 @@ const [anchorEl, setAnchorEl] = useState(null);
     )}    
     </div>
 
-    <div style={{marginTop: 'auto'}}>
+    {/* <div style={{marginTop: 'auto'}}>
     <div className='Footer' style={{
-    backgroundColor: '#002D62',
+    backgroundColor: 'black',
     height: '7vh',
     display: 'flex',
     alignItems: 'center',
@@ -111,7 +98,7 @@ const [anchorEl, setAnchorEl] = useState(null);
       </Menu>
     </div>
 
-    </div>
+    </div> */}
     </div>
   );
 }

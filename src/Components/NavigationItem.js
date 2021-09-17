@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import '../List.css';
 import Icon from '@material-ui/core/Icon'
-import { AiFillSetting, AiFillMoneyCollect } from "react-icons/ai";
+import { AiFillClockCircle, AiFillPlaySquare, AiFillHome, AiFillSetting } from "react-icons/ai";
 import { BsNewspaper } from "react-icons/bs";
 
 
@@ -68,12 +68,14 @@ const normalFont = {fontWeight: 'normal', color: 'white', background: 'none', bo
 
 const returnIcon = (item) => {
   switch (item) {
-    case "Management":  
+    case "Subscribe":  
+        return <AiFillPlaySquare/>
+    case "Home":
+        return <AiFillHome/>
+    case "Later":
+        return <AiFillClockCircle/>
+    case "Settings":
         return <AiFillSetting/>
-    case "Financial":
-        return <AiFillMoneyCollect/>
-    case "News":
-        return <BsNewspaper/>
     default:
         return null
 }
@@ -83,7 +85,7 @@ const returnIcon = (item) => {
   return (
     <React.Fragment>
     <div style={{flex: 1}}>
-    <p style={{left: 40}}><Link to={items[index].link}><button style={ items[index].isSelected ? selectedFont : normalFont} onClick={() => {open(); dispatch({type:'SelectItem', payload: index})}} >{returnIcon(items[index].icon)}  {items[index].name} {items[index].isOpened ? '▲' : '▼' }</button></Link></p>
+    <p style={{left: 40}}><Link to={items[index].link}><button className='nav-' style={ items[index].isSelected ? selectedFont : normalFont} onClick={() => {open(); dispatch({type:'SelectItem', payload: index})}} >{returnIcon(items[index].icon)}  {items[index].name}</button></Link></p>
     </div>
     {items[index].isOpened && items.filter(child => child.parent == id).map((child, key) => <ul key={key}><li><NavigationItem id={child.id} /></li></ul>) }
     </React.Fragment>

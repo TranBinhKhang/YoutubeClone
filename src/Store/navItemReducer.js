@@ -1,75 +1,39 @@
 const item = [
     {
-        "name": 'Management',
+        "name": 'Home',
         'id': 1,
         'parent': 0,
-        'link': '#',
+        'link': '/',
         'isOpened': true,
         'isSelected': true,
-        'icon': 'Management'
+        'icon': 'Home'
     },
     {
-        'name': 'Folder CRUD',
-        'id': 2,
-        'parent': 1,
-        'link': 'foldercrud',
-        'isOpened': false,
-        'isSelected': false,
-        'icon': null
-    },
-    {
-        'name': 'Folder Tree',
-        'id': 3,
-        'parent': 1,
-        'link': 'folder',
-        'isOpened': false,
-        'isSelected': false,
-        'icon': null
-    },
-    {
-        'name': 'Old CRUD',
-        'id': 4,
-        'parent': 1,
-        'link': 'crud',
-        'isOpened': false,
-        'isSelected': false,
-        'icon': null
-    },
-    {
-        'name': 'Financial',
+        'name': 'Watch later',
         'id': 6,
         'parent': 0,
-        'link': '#',
+        'link': '/watchlater',
         'isOpened': false,
         'isSelected': false,
-        'icon': 'Financial'
+        'icon': 'Later'
     },
     {
-        'name': 'Salary',
-        'id': 7,
-        'parent': 6,
-        'link': 'Salary',
-        'isOpened': false,
-        'isSelected': false,
-        'icon': null
-    },
-    {
-        'name': 'Expenses',
-        'id': 8,
-        'parent': 6,
-        'link': 'Expenses',
-        'isOpened': false,
-        'isSelected': false,
-        'icon': null
-    },
-    {
-        'name': 'News',
+        'name': 'Subscription',
         'id': 9,
         'parent': 0,
-        'link': 'News',
+        'link': '/Subscription',
         'isOpened': false,
         'isSelected': false,
-        'icon': 'News'
+        'icon': 'Subscribe'
+    },
+    {
+        'name': 'Settings',
+        'id': 10,
+        'parent': 0,
+        'link': '/Settings',
+        'isOpened': false,
+        'isSelected': false,
+        'icon': 'Settings'
     },
 ]
 

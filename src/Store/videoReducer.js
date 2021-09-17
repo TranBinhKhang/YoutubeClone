@@ -1,14 +1,19 @@
 
-const folderReducer = (
-    state = {data: []},
+const videoReducer = (
+    state = {data: [], myVideo: []},
     action
 ) => {
     const middle = state.data
     switch (action.type) {
-        case "FetchFolder":
+        case "FetchVideo":
             return {
                 ...state,
                 data: action.data
+        }
+        case "FetchMyVideo":
+            return {
+                ...state,
+                myVideo: action.data
         }
         case "OpenFolder":  
             middle[action.payload].isOpened = !middle[action.payload].isOpened;
@@ -86,4 +91,4 @@ const folderReducer = (
     }
 }
 
-export default folderReducer;
+export default videoReducer;

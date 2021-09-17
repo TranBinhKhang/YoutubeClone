@@ -51,6 +51,80 @@ var folderSchema = new mongoose.Schema({
 });
 var Folder = mongoose.model('Folder', folderSchema);
 
+var videoSchema = new mongoose.Schema({
+  name: {
+      type: String,
+      unique: false,
+      required: true
+  },
+  thumbnail: {
+      type: String,
+      required: false,
+      default: 'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640'
+  },
+  uri: {
+    type: String,
+    required: false,
+    default: 'https://res.cloudinary.com/daekmobzf/video/upload/v1618218015/yt1s.com_-_video_placeholder_v144P_sgs82l.mp4'
+  },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: false,
+  },
+  views: {
+    type: Number,
+    unique: false,
+    required: true,
+    default: 0
+  },
+  comment:  {
+    type: Array,
+    required: false,
+},
+  tag:  {
+  type: String,
+  required: false,
+},
+});
+var Video = mongoose.model('Video', videoSchema);
+
+var userSchema = new mongoose.Schema({
+  username: {
+      type: String,
+      unique: false,
+      required: true
+  },
+  password: {
+      type: String,
+      required: true
+  },
+  watchLater: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Video'
+ }],
+});
+var User = mongoose.model('User', userSchema);
+
+async function createUser(username, password) {
+  const user = new User({
+    username, password
+  });
+  const result = await user.save();
+};
+
+// async function createVideo(name, thumbnail, uri, author, views) {
+//   const video = new Video({
+//     name, thumbnail, uri, author, views
+//   });
+//   const result = await video.save();
+// };
+
+// createVideo('America', 'https://im-media.voltron.voanews.com/Drupal/01live-166/styles/sourced/s3/2019-04/8E5F857F-716C-4FD1-835F-93FCCACF17D1.jpg?itok=MyJ4Yb0C', 'https://res.cloudinary.com/daekmobzf/video/upload/v1630672810/videoplayback_morv1f.mp4', 'Donald Trump', 10000)
+
+// createUser('Khang', '123456')
+
+
 var listSchema = new mongoose.Schema({
   code: {
     type: String,
@@ -221,6 +295,8 @@ const users = [
             res.send('error');
         }
     });
+
+
     
 
     app.post('/api/additem', authorization, async (req, res) => {
@@ -281,6 +357,25 @@ const users = [
     }
   });
 
+  app.post('/api/postcomment', authorization, async (req, res) => {
+    try {
+      const comment = await Video.findOne({ _id: req.body._id}).select('comment');
+      const newComment = {
+        _id: new mongoose.Types.ObjectId, 
+        username: req.body.username,
+        postedAt: new Date().toISOString().split('T')[0],
+        comment: req.body.comment,
+        parent: req.body.parent
+    }
+    comment.comment.push(newComment);
+    comment.save();
+    res.send(comment.comment);
+    }
+    catch(err) {
+        res.send(err)
+    }
+  });
+
   app.get('/api/list', async (req, res) => {
     try {
       const item = await List.find();
@@ -290,6 +385,63 @@ const users = [
         res.send(err)
     }
 });
+
+
+
+app.get('/api/fetchall', async (req, res) => {
+  try {
+    const video = await Video.find().populate('author', 'username');
+    res.send(video);
+  }
+  catch(err) {
+      res.send(err)
+  }
+});
+
+app.post('/api/fetchvideo', async (req, res) => {
+  try {
+    let video = await Video.findOne({ _id: req.body._id}).populate('author', 'username');
+    let videos = video.comment.map(c => ({...c, showChild: false,
+    showReply: false}));
+    video.comment = videos;
+    res.send(video);
+  }
+  catch(err) {
+      res.send(err)
+  }
+});
+
+app.post('/api/watchlater', authorization, async (req, res) => {
+  try {
+    let user = await User.findOne({ username: req.body.username});
+    if (user.watchLater.includes(req.body.videoId)) return;
+    else user.watchLater.push(req.body.videoId);
+    user.save();
+    res.send(user);
+  }
+  catch(err) {
+      res.send(err)
+  }
+});
+
+app.post('/api/getwatchlater', authorization, async (req, res) => {
+  try {
+    let user = await User.findOne({ username: req.body.username}).populate({ 
+      path: 'watchLater',
+      model: 'Video',
+      populate: {
+          path: 'author',
+          model: 'User'
+      }
+  });;
+    res.send(user);
+  }
+  catch(err) {
+      res.send(err)
+  }
+});
+
+
 
 
 //   app.post('/api/additem', authorization, async (req, res) => {

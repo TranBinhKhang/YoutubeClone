@@ -1,17 +1,15 @@
 
 import { combineReducers } from "redux";
-import folderReducer from "./folderReducer"
-import doReducer from "./doReducer"
 import accountReducer from "./accountReducer";
-import listReducer from "./listReducer";
 import navItemReducer from "./navItemReducer";
+import videoReducer from "./videoReducer";
+import commentReducer from "./commentReducer";
 
 const reducers = combineReducers({
-    folder: folderReducer,
-    doState: doReducer,
     account: accountReducer,
-    list: listReducer,
-    item: navItemReducer
+    item: navItemReducer,
+    video: videoReducer,
+    comment: commentReducer
 })
 
 export default reducers

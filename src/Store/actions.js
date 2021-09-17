@@ -15,129 +15,53 @@ export function getData() {
   };
 }
 
-export function getCRUD() {
+export function getVideo() {
   return dispatch => {
-    axios.get(api + "/list")
+    axios
+    .get(api + "/fetchall")
     .then(res =>
       dispatch({
-        type: "FetchCRUD",
+        type: "FetchVideo",
         data: res.data
       })
     );
   };
 }
 
-export function getUpdate(data) {
+export function getComment(data) {
   return dispatch => {
       dispatch({
-        type: "FetchUpdate",
+        type: "GetComment",
         payload: data
       })
   };
 }
-
-export function GetFolderUpdate(data) {
+export function getMyVideo() {
   return dispatch => {
+    axios.get(api + "/fetchmyvideo")
+    .then(res =>
       dispatch({
-        type: "FolderUpdate",
-        payload: data
+        type: "FetchMyVideo",
+        data: res.data
       })
+    );
   };
 }
 
-export const UpdateName = (data) => {
+
+export const ShowChild = (index) => {
   return (dispatch) => {
       dispatch({
-          type: "UpdateName",
-          payload: data
+          type: "ShowChild",
+          payload: index
       });
-    }
+  }
 }
 
-export const UpdateId = (data) => {
+export const ShowCommentReply = (index) => {
   return (dispatch) => {
       dispatch({
-          type: "UpdateId",
-          payload: data
-      });
-    }
-}
-
-export const UpdateParent = (data) => {
-  return (dispatch) => {
-      dispatch({
-          type: "UpdateParent",
-          payload: data
-      });
-    }
-}
-
-
-export const EditCode = (data) => {
-  return (dispatch) => {
-      dispatch({
-          type: "EditCode",
-          payload: data
-      });
-    }
-}
-
-export const EditListName = (data) => {
-  return (dispatch) => {
-      dispatch({
-          type: "EditListName",
-          payload: data
-      });
-    }
-}
-
-export const EditCategory = (data) => {
-  return (dispatch) => {
-      dispatch({
-          type: "EditCategory",
-          payload: data
-      });
-    }
-}
-
-export const EditBudget = (data) => {
-  return (dispatch) => {
-      dispatch({
-          type: "EditBudget",
-          payload: data
-      });
-    }
-}
-
-export const EditStatus = (data) => {
-  return (dispatch) => {
-      dispatch({
-          type: "EditStatus",
-          payload: data
-      });
-    }
-}
-
-
-
-
-// export function deleteCRUD() {
-//   return dispatch => {
-//     axios.post('http://192.168.1.142:4000/api/deleteitem', {_id: rowData._id}, axiosConfig)
-//     .then(res =>
-//       dispatch({
-//         type: "FetchCRUD",
-//         data: res.data
-//       })
-//     );
-//   };
-// }
-
-
-export const openFolder = (index) => {
-  return (dispatch) => {
-      dispatch({
-          type: "OpenFolder",
+          type: "ShowCommentReply",
           payload: index
       });
   }
@@ -171,119 +95,6 @@ export const selectItem = (index) => {
 }
 
 
-export const showInput = (index) => {
-  return (dispatch) => {
-      dispatch({
-          type: "ShowInput",
-          payload: index
-      });
-  }
-}
-
-export const showEdit = (index) => {
-  return (dispatch) => {
-      dispatch({
-          type: "ShowEdit",
-          payload: index
-      });
-  }
-}
-
-export const EditName = (index, editName) => {
-  return (dispatch) => {
-      dispatch({
-          type: "EditName",
-          payload: {
-            index,
-            editName
-          }
-      });
-    }
-}
-
-export const NewFolder = (newName, parent) => {
-  return (dispatch) => {
-      dispatch({
-          type: "NewFolder",
-          payload: {
-            newName,
-            parent
-          }
-      });
-    }
-  }
-
-export const NewFolderTop = (newName) => {
-  return (dispatch) => {
-      dispatch({
-          type: "NewFolder",
-          payload: newName
-      });
-  }
-}
-
-export const DeleteFolder = (index) => {
-  return (dispatch) => {
-      dispatch({
-          type: "DeleteFolder",
-          payload: index
-      });
-  }
-}
-
-export const UndoState = (oldState) => {
-  return (dispatch) => {
-      dispatch({
-          type: "UndoState",
-          payload: oldState
-      });
-  }
-}
-
-export const RedoState = (newState) => {
-  return (dispatch) => {
-      dispatch({
-          type: "RedoState",
-          payload: newState
-      });
-  }
-}
-
-export const UndoPush = (oldState) => {
-  return (dispatch) => {
-      dispatch({
-          type: "UndoPush",
-          payload: oldState
-      });
-  }
-}
-
-export const RedoPush = (newState) => {
-  return (dispatch) => {
-      dispatch({
-          type: "RedoPush",
-          payload: newState
-      });
-  }
-}
-
-// export const DoTest = (newState) => {
-//   return (dispatch) => {
-//       dispatch({
-//           type: "DoTest",
-//           payload: newState
-//       });
-//   }
-// }
-
-export const Undo = (oldState) => {
-  return (dispatch) => {
-      dispatch({
-          type: "Undo",
-          payload: oldState
-      });
-  }
-}
 
 export const setUsername = (name) => {
   return (dispatch) => {
