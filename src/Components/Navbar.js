@@ -1,4 +1,4 @@
-import div, { useState } from 'react';
+import { useState } from 'react';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -48,34 +48,6 @@ function NavBar(props) {
             <button style={{verticalAlign: 'bottom', textAlign: 'center', verticalAlign: 'middle'}} className="btn btn-outline-light my-2 my-sm-0" onClick={() => history.push(`/search/${searchparam}`)}><BsSearch style={{verticalAlign: 'middle'}}/></button></div>
 
             {user ? loggedin : guess}
-            {/* <button
-                className="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
-                ABC
-            </button> */}
-                {/* <div className="navbar-nav" style={{color: 'white'}}>
-                        <React.Fragment>
-                            <NavLink className="nav-item nav-link" to="/AdminCheck" style={{color: 'white'}}>
-                                Approving account
-                            </NavLink>
-                            <NavLink className="nav-item nav-link" to="/AccountList" style={{color: 'white'}}>
-                                Account List
-                            </NavLink>
-                            <NavLink className="nav-item nav-link" to="/AddminCreateAccount" style={{color: 'white'}}>
-                                Create new account
-                            </NavLink>
-                            < NavLink className="nav-item nav-link"
-                                to="/DeadLine" style={{color: 'white'}}>
-                                Manage DeadLine
-                            </NavLink>
-                        </React.Fragment>
-                </div> */}
         </nav >
     );
 }
